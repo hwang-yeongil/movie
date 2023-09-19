@@ -13,15 +13,24 @@
 <body>
 	<th:block layout:fragment="header" th:include="@{/fragments/header}"></th:block>
 
-	<div layout:fragment="content" class="content">
-		<h2>This is Content</h2>
+	<div class="container">
+		<div>
+			<table>
+				<thead>
+					<tr>
+						<th>#</th>
+						<th>이름</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr th:each="member : ${members}">
+						<td th:text="${member.id}"></td>
+						<td th:text="${member.name}"></td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
 	</div>
-	<p>회원 기능</p>
-	<p>
-		<a href="/members/new">회원 가입</a>
-		<a href="/members">회원 목록</a>
-	</p>
-
 	<th:block layout:fragment="footer" th:include="@{/fragments/footer}"></th:block>
 </body>
 </html>

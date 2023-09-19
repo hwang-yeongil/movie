@@ -10,12 +10,12 @@ import zeroone.movie.domain.Member;
 import zeroone.movie.repository.MemberRepository;
 import zeroone.movie.repository.MemoryMemberRepository;
 
-@Service
+//@Service
 public class MemberService {
 
 	private final MemberRepository memberRepository;
 	
-	@Autowired
+//	@Autowired
 	public MemberService(MemberRepository memberRepository) {
 		this.memberRepository = memberRepository;
 	}
@@ -32,6 +32,7 @@ public class MemberService {
 	private void validateDuplicateMember(Member member) { // 중복 회원
 		memberRepository.findByName(member.getName()).ifPresent(m -> {
 			throw new IllegalStateException("이미 존재하는 회원입니다.");
+			
 		});
 	}
 
