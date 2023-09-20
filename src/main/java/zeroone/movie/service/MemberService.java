@@ -5,12 +5,14 @@ import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import zeroone.movie.domain.Member;
 import zeroone.movie.repository.MemberRepository;
 import zeroone.movie.repository.MemoryMemberRepository;
 
 //@Service
+//@Transactional
 public class MemberService {
 
 	private final MemberRepository memberRepository;
