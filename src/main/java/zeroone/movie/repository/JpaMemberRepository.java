@@ -5,10 +5,13 @@ import java.util.Optional;
 
 import javax.persistence.EntityManager;
 
+import org.springframework.stereotype.Repository;
+
 import zeroone.movie.domain.Member;
 
-public class JpaMemberRepository implements MemberRepository {
 
+public class JpaMemberRepository implements MemberRepository {
+	
 	private final EntityManager em;
 
 	public JpaMemberRepository(EntityManager em) {

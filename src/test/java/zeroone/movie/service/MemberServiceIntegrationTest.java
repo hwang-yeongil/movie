@@ -22,15 +22,15 @@ public class MemberServiceIntegrationTest {
 	@Test
 	public void 회원가입() throws Exception{
 		Member member = new Member();
-		member.setName("hello");
-		member.setId(10L);
+		member.setName("hello111");
+//		member.setId(10L);
 //		System.out.println(member.getName());
 		
-		memberService.join(member);
+//		memberService.join(member);
 		
-//		Long saveId = memberService.join(member);
+		Long saveId = memberService.join(member);
 		
-		Member findMember = memberRepository.findById(memberService.join(member)).get();
+		Member findMember = memberRepository.findById(saveId).get();
 		assertEquals(member.getName(), findMember.getName());
 	}
 	

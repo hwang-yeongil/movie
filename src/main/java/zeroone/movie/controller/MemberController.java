@@ -31,6 +31,7 @@ public class MemberController {
 	public String create(MemberForm form) {
 		
 		Member member = new Member();
+//		member.setId(2L);
 		member.setName(form.getName());
 		
 		memberService.join(member);
