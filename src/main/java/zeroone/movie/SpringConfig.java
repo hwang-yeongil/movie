@@ -16,14 +16,11 @@ import zeroone.movie.service.MemberService;
 @Configuration
 public class SpringConfig {
 
-//	private final DataSource dataSource;
-//	private final EntityManager em;
 	private final MemberRepository memberRepository;
 
 	@Autowired
 	public SpringConfig(MemberRepository memberRepository) {
-//		this.dataSource = dataSource;
-//		this.em = em;
+
 		this.memberRepository = memberRepository;
 	}
 

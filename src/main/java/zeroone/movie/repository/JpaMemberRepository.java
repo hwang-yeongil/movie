@@ -43,4 +43,11 @@ public class JpaMemberRepository implements MemberRepository {
 		// TODO Auto-generated method stub
 		return em.createQuery("select m from Member m", Member.class).getResultList();
 	}
+
+//	@Override
+//	public Optional<Member> findByUserpw(String userpw) {
+//		List<Member> result = em.createQuery("select m from Member m where m.userpw = :userpw", Member.class)
+//				.setParameter("userpw", userpw).getResultList();
+//		return result.stream().findAny();
+//	}
 }
