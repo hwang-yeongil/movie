@@ -1,9 +1,9 @@
-package zeroone.movie.repository;
+package zeroone.movie.memberRepository;
 
 import java.util.List;
 import java.util.Optional;
 
-import zeroone.movie.domain.Member;
+import zeroone.movie.memeberDomain.Member;
 
 public interface MemberRepository {
 
