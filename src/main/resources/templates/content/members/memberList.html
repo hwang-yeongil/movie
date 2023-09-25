@@ -28,7 +28,11 @@
 						<td th:text="${member.name}"></td>
 						<td th:text="${member.userpw}"></td>
 						<td th:text="${member.address}"></td>
-						<td><a th:href="@{/member/delete(id=${member.id})}">삭제</a></td>
+						<td th:text="${member.secession}"></td>
+						<td><a th:href="@{/member/delete(id=${member.id})}">삭제1</a></td>
+						<td><a th:href="@{/member/delete2(id=${member.id})}">삭제2</a></td>
+					<div th:if="${member.secession == 0}">
+					</div>
 					</tr>
 				</tbody>
 			</table>

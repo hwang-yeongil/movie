@@ -36,7 +36,7 @@ public class Member implements Serializable{
 	}
 
 	public void setAdmin(int admin) {
-		this.admin = 0;
+		this.admin = admin;
 	}
 
 	public int getSecession() {
@@ -44,7 +44,7 @@ public class Member implements Serializable{
 	}
 
 	public void setSecession(int secession) {
-		this.secession = 0;
+		this.secession = secession;
 	}
 
 
