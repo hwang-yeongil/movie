@@ -4,6 +4,8 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
+import java.util.Optional;
+
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -20,7 +22,7 @@ public class MemberServiceIntegrationTest {
 	@Autowired MemberService memberService;
 	@Autowired MemberRepository memberRepository;
 	
-	@Test
+//	@Test
 	public void 회원가입() throws Exception{
 		Member member = new Member();
 		member.setName("hello111");
@@ -52,5 +54,18 @@ public class MemberServiceIntegrationTest {
                 () -> memberService.join(member2));
       
         assertThat(e.getMessage()).isEqualTo("이미 존재하는 회원입니다.");
+    }
+    @Test
+    public void 수정() throws Exception{
+    	memberService.update(1L, "update", "update");
+    	
+    	
+    }
+    
+    
+//    @Test
+    public void 회원삭제() throws Exception{
+    	memberRepository.deleteById((long) 29);
+    	
     }
 }

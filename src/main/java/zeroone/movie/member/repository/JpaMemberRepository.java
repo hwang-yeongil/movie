@@ -35,7 +35,6 @@ public class JpaMemberRepository implements MemberRepository {
 		List<Member> result = em.createQuery("select m from Member m where m.name = :name", Member.class)
 				.setParameter("name", name).getResultList();
 		return result.stream().findAny();
-
 	}
 
 	@Override
@@ -44,10 +43,18 @@ public class JpaMemberRepository implements MemberRepository {
 		return em.createQuery("select m from Member m", Member.class).getResultList();
 	}
 
+	@Override
+	public void deleteById(Long id) {
+		Member member = em.find(Member.class, id);
+		em.remove(member);
+	}
+
 //	@Override
-//	public Optional<Member> findByUserpw(String userpw) {
-//		List<Member> result = em.createQuery("select m from Member m where m.userpw = :userpw", Member.class)
-//				.setParameter("userpw", userpw).getResultList();
-//		return result.stream().findAny();
+//	public Member update(Long id) {
+//		// TODO Auto-generated method stub
+//		Member member = em.find(Member.class, id);
+//		member.setUserpw("1234qwer");
+//		return member;
 //	}
+
 }
