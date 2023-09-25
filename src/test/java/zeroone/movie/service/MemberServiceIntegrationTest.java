@@ -9,9 +9,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.transaction.annotation.Transactional;
 
-import zeroone.movie.memberRepository.MemberRepository;
-import zeroone.movie.memberService.MemberService;
-import zeroone.movie.memeberDomain.Member;
+import zeroone.movie.member.domain.Member;
+import zeroone.movie.member.repository.MemberRepository;
+import zeroone.movie.member.service.MemberService;
 
 @SpringBootTest
 @Transactional

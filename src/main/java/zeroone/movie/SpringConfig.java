@@ -7,9 +7,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
-import zeroone.movie.memberRepository.JpaMemberRepository;
-import zeroone.movie.memberRepository.MemberRepository;
-import zeroone.movie.memberService.MemberService;
+import zeroone.movie.member.repository.JpaMemberRepository;
+import zeroone.movie.member.repository.MemberRepository;
+import zeroone.movie.member.service.MemberService;
 
 @Configuration
 public class SpringConfig {

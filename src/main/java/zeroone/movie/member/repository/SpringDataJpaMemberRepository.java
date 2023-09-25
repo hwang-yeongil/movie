@@ -1,10 +1,10 @@
-package zeroone.movie.memberRepository;
+package zeroone.movie.member.repository;
 
 import java.util.Optional;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 
-import zeroone.movie.memeberDomain.Member;
+import zeroone.movie.member.domain.Member;
 
 public interface SpringDataJpaMemberRepository extends JpaRepository<Member, Long>, MemberRepository{
 	

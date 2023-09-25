@@ -1,10 +1,10 @@
-package zeroone.movie.memberController;
+package zeroone.movie.member.controller;
 
 import org.springframework.web.bind.annotation.PostMapping;
 
 import com.fasterxml.jackson.datatype.jsr310.deser.InstantDeserializer.FromDecimalArguments;
 
-import zeroone.movie.memeberDomain.Member;
+import zeroone.movie.member.domain.Member;
 
 public class MemberForm {
 	

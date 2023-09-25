@@ -1,4 +1,4 @@
-package zeroone.movie.memberController;
+package zeroone.movie.member.controller;
 
 import java.util.List;
 
@@ -8,8 +8,8 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 
-import zeroone.movie.memberService.MemberService;
-import zeroone.movie.memeberDomain.Member;
+import zeroone.movie.member.domain.Member;
+import zeroone.movie.member.service.MemberService;
 
 @Controller
 public class MemberController {

@@ -1,4 +1,4 @@
-package zeroone.movie.memeberDomain;
+package zeroone.movie.member.domain;
 
 import java.io.Serializable;
 

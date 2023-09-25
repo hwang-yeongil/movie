@@ -1,4 +1,4 @@
-package zeroone.movie.memberRepository;
+package zeroone.movie.member.repository;
 
 import java.util.List;
 import java.util.Optional;
@@ -7,7 +7,7 @@ import javax.persistence.EntityManager;
 
 import org.springframework.stereotype.Repository;
 
-import zeroone.movie.memeberDomain.Member;
+import zeroone.movie.member.domain.Member;
 
 
 public class JpaMemberRepository implements MemberRepository {
