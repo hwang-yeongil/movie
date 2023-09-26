@@ -49,12 +49,4 @@ public class JpaMemberRepository implements MemberRepository {
 		em.remove(member);
 	}
 
-//	@Override
-//	public Member update(Long id) {
-//		// TODO Auto-generated method stub
-//		Member member = em.find(Member.class, id);
-//		member.setUserpw("1234qwer");
-//		return member;
-//	}
-
 }

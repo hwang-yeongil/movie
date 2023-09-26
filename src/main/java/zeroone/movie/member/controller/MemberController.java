@@ -40,7 +40,6 @@ public class MemberController {
 //		member.setId(2L);
 		member.setName(form.getName());
 		member.setUserpw(form.getUserpw());
-		member.setAddress(form.getAddress());
 //		초기값 0으로 > 1일때 (관리자 / 삭제된 계정)
 		member.setAdmin(0);
 		member.setSecession(0);

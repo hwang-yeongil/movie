@@ -10,7 +10,6 @@ public class MemberForm {
 	
 	private String name;
 	private String userpw;
-	private String address;
 	
 	public String getName() {
 		return name;
@@ -26,15 +25,6 @@ public class MemberForm {
 
 	public void setUserpw(String userpw) {
 		this.userpw = userpw;
-	}
-
-	public String getAddress() {
-		return address;
-	}
-
-	public void setAddress(String address) {
-		this.address = address;
-	}
-	
+	}	
 	
 }

@@ -29,7 +29,6 @@ public class MemberServiceIntegrationTest {
 		Member member = new Member();
 		member.setName("hello111");
 		member.setUserpw("hello");
-		member.setAddress("world");
 //		member.setId(10L);
 //		System.out.println(member.getName());
 

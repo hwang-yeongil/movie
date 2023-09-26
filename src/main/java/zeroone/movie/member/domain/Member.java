@@ -19,17 +19,8 @@ public class Member implements Serializable{
 	@Column(name = "USERNAME")
 	private String name;
 	private String userpw;
-	private String address;
 	private int admin;
 	private int secession;
-	
-	public String getAddress() {
-		return address;
-	}
-
-	public void setAddress(String address) {
-		this.address = address;
-	}
 
 	public int getAdmin() {
 		return admin;
