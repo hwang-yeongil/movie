@@ -27,7 +27,6 @@
 						<td th:text="${member.id}"></td>
 						<td th:text="${member.name}"></td>
 						<td th:text="${member.userpw}"></td>
-						<td th:text="${member.address}"></td>
 						<td th:text="${member.secession}"></td>
 						<td><a th:href="@{/member/delete(id=${member.id})}">삭제1</a></td>
 						<td><a th:href="@{/member/delete2(id=${member.id})}">삭제2</a></td>
@@ -38,6 +37,5 @@
 			</table>
 		</div>
 	</div>
-	<th:block layout:fragment="footer" th:include="@{/fragments/footer}"></th:block>
 </body>
 </html>

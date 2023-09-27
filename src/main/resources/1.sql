@@ -6,6 +6,63 @@ CREATE TABLE MEMBER(
 	secession char(4) NOT NULL
 );
 
+
+CREATE TABLE movie(
+	movie_pk NUMBER NOT NULL PRIMARY key,
+	movie_name varchar2(50) NOT NULL
+);
+
+
+CREATE TABLE theater(
+	theater_pk NUMBER NOT NULL PRIMARY KEY
+);
+
+CREATE TABLE seat(
+	seat_pk NUMBER NOT NULL PRIMARY key,
+	theater_pk NUMBER NOT NULL,
+	seat_name varchar2(1000) NOT NULL,
+	CONSTRAINT seat_theater_fk foreign key(theater_pk) references theater (theater_pk)
+);
+
+
+
+CREATE TABLE screen(
+	scr_pk NUMBER NOT NULL PRIMARY key,
+	theater_pk NUMBER NOT NULL,
+	movie_pk NUMBER NOT NULL,
+	scr_date date NOT NULL,
+	CONSTRAINT scr_theater_fk foreign key(theater_pk) references theater (theater_pk),
+	CONSTRAINT scr_movie_fk foreign key(movie_pk) references movie (movie_pk)
+);
+
+INSERT INTO SCREEN VALUES (1,1,1,TO_DATE('23/12/01 07:00', 'YY/MM/DD HH24:MI'));
+INSERT INTO SCREEN VALUES (2,1,2,TO_DATE('23/12/01 10:00', 'YY/MM/DD HH24:MI'));
+INSERT INTO SCREEN VALUES (3,2,TO_DATE('23/12/03 08:00', 'YY/MM/DD HH24:MI'));
+INSERT INTO SCREEN VALUES (4,2,TO_DATE('23/12/03 12:00', 'YY/MM/DD HH24:MI'));
+
+CREATE TABLE review(
+	review_pk NUMBER NOT NULL PRIMARY key,
+	movie_pk NUMBER NOT NULL,
+	userid NUMBER NOT NULL,
+	rv_date DATE NOT NULL,
+	rv_content varchar2(1000) NOT NULL,
+	rv_title varchar2(50) NOT NULL,
+	CONSTRAINT rv_userid_fk foreign key(userid) references member (id),
+	CONSTRAINT rv_movie_fk foreign key(movie_pk) references movie (movie_pk)
+);
+
+CREATE TABLE reservation(
+	reservation_pk NUMBER NOT NULL PRIMARY key,
+	userid NUMBER NOT NULL,
+	scr_pk NUMBER NOT NULL,
+	seat_pk NUMBER NOT NULL,
+	reserv_date date NOT NULL,
+	CONSTRAINT res_seat_fk foreign key(seat_pk) references seat (seat_pk),
+	CONSTRAINT res_userid_fk foreign key(userid) references member (id),
+	CONSTRAINT res_scr_fk foreign key(scr_pk) references screen (scr_pk)
+);
+
+
 INSERT INTO "MEMBER" VALUES(1, 'admin','admin','1','0');
 INSERT INTO "MEMBER" VALUES(2, 'tester1','1234','0','0');
 INSERT INTO "MEMBER" VALUES(3, 'tester2','1234','0','0');
@@ -14,11 +71,6 @@ INSERT INTO "MEMBER" VALUES(5, 'tester4','1234','0','0');
 INSERT INTO "MEMBER" VALUES(6, 'tester5','1234','0','0');
 INSERT INTO "MEMBER" VALUES(7, 'tester6','1234','0','0');
 
-CREATE TABLE movie(
-	movie_pk NUMBER NOT NULL PRIMARY key,
-	movie_name varchar2(50) NOT NULL
-);
-
 INSERT INTO MOVIE VALUES (1,'오펜하이머');
 INSERT INTO MOVIE VALUES (2,'천박사 퇴마 연구소');
 --INSERT INTO MOVIE VALUES (3,'더 넌 2');
@@ -26,17 +78,7 @@ INSERT INTO MOVIE VALUES (2,'천박사 퇴마 연구소');
 --INSERT INTO MOVIE VALUES (5,'30일');
 --INSERT INTO MOVIE VALUES (6,'거미집');
 
-CREATE TABLE theater(
-	theater_pk NUMBER NOT NULL PRIMARY KEY
-);
 INSERT INTO theater VALUES(1);
-
-CREATE TABLE seat(
-	seat_pk NUMBER NOT NULL PRIMARY key,
-	theater_pk NUMBER NOT NULL,
-	seat_name varchar2(1000) NOT NULL,
-	CONSTRAINT seat_theater_fk foreign key(theater_pk) references theater (theater_pk)
-);
 
 INSERT INTO SEAT values(1, 1, 'A1');
 INSERT INTO SEAT values(2, 1, 'A2');
@@ -79,44 +121,8 @@ INSERT INTO SEAT values(38, 2, 'B8');
 INSERT INTO SEAT values(39, 2, 'B9');
 INSERT INTO SEAT values(40, 2, 'B10');
 
-
-CREATE TABLE screen(
-	scr_pk NUMBER NOT NULL PRIMARY key,
-	theater_pk NUMBER NOT NULL,
-	movie_pk NUMBER NOT NULL,
-	scr_date date NOT NULL,
-	CONSTRAINT scr_theater_fk foreign key(theater_pk) references theater (theater_pk),
-	CONSTRAINT scr_movie_fk foreign key(movie_pk) references movie (movie_pk)
-);
-
-INSERT INTO SCREEN VALUES (1,1,1,TO_DATE('23/12/01 07:00', 'YY/MM/DD HH24:MI'));
-INSERT INTO SCREEN VALUES (2,1,2,TO_DATE('23/12/01 10:00', 'YY/MM/DD HH24:MI'));
-INSERT INTO SCREEN VALUES (3,2,TO_DATE('23/12/03 08:00', 'YY/MM/DD HH24:MI'));
-INSERT INTO SCREEN VALUES (4,2,TO_DATE('23/12/03 12:00', 'YY/MM/DD HH24:MI'));
-
-CREATE TABLE review(
-	review_pk NUMBER NOT NULL PRIMARY key,
-	movie_pk NUMBER NOT NULL,
-	userid NUMBER NOT NULL,
-	rv_date DATE NOT NULL,
-	rv_content varchar2(1000) NOT NULL,
-	rv_title varchar2(50) NOT NULL,
-	CONSTRAINT rv_userid_fk foreign key(userid) references member (id),
-	CONSTRAINT rv_movie_fk foreign key(movie_pk) references movie (movie_pk)
-);
-
-CREATE TABLE reservation(
-	reservation_pk NUMBER NOT NULL PRIMARY key,
-	userid NUMBER NOT NULL,
-	scr_pk NUMBER NOT NULL,
-	seat_pk NUMBER NOT NULL,
-	reserv_date date NOT NULL,
-	CONSTRAINT res_seat_fk foreign key(seat_pk) references seat (seat_pk),
-	CONSTRAINT res_userid_fk foreign key(userid) references member (id),
-	CONSTRAINT res_scr_fk foreign key(scr_pk) references screen (scr_pk)
-);
-
 INSERT INTO RESERVATION values(1,2,1,10,to_date(sysdate,'YY/MM/DD HH24:MI'));
+INSERT INTO RESERVATION values(2,2,1,9,to_date(sysdate,'YY/MM/DD HH24:MI'));
 
 DROP TABLE reservation;
 DROP TABLE review;
@@ -127,6 +133,50 @@ DROP TABLE theater;
 DROP TABLE movie;
 DROP TABLE MEMBER;
 
+------------------------------- 필요한 쿼리들 ------------------
+/* 보여줘야할거
+ 1. 예매 화면 : 영화 이름(리스트) / 선택한 영화의 상영일 및 시간 / 해당 시간의 상영관 / 상영관읜 남은 좌석 (총 좌석- 예매한 죄석)   
+ 2. 내가 예매한 영화 : 예매한 영화 화면 / 영화 이름 / 예약일 / 상영일 및 시간 / 상영관 / 좌석 번호 / 
+ 3. 
+ 
+ , s2.SEAT_NAME  
+*/
+--영화 이름(리스트)
+SELECT m.MOVIE_NAME 
+FROM SCREEN s  , MOVIE m 
+WHERE s.MOVIE_PK = m.MOVIE_PK 
+AND s.SCR_DATE >SYSDATE
+;
+--영화 이름 / 선택한 영화의 상영일 및 시간 / 해당 시간의 상영관 (리스트)
+SELECT m.MOVIE_NAME , s.SCR_DATE ,s.THEATER_PK 
+FROM SCREEN s  , MOVIE m 
+WHERE s.MOVIE_PK = m.MOVIE_PK
+AND s.MOVIE_PK = 1
+AND s.SCR_DATE >SYSDATE
+;
+--영화 이름 / 선택한 영화의 상영일 및 시간 / 해당 시간의 상영관 / 총 좌석 (리스트)
+SELECT m.MOVIE_NAME , s.SCR_DATE, s.THEATER_PK, s2.SEAT_NAME 
+FROM SCREEN s  , MOVIE m , SEAT s2 
+WHERE s.MOVIE_PK = m.MOVIE_PK
+AND s.MOVIE_PK = 1
+AND s.SCR_DATE >SYSDATE
+AND s.THEATER_PK =1
+AND s.THEATER_PK = s2.THEATER_PK 
+;
+
+--예매된 좌석
+SELECT s2.SEAT_NAME  
+FROM MOVIE m2 ,RESERVATION r ,SCREEN s,THEATER t ,SEAT s2 
+WHERE r.SCR_PK = s.SCR_PK
+AND s.MOVIE_PK = m2.MOVIE_PK
+AND s.THEATER_PK = t.THEATER_PK
+AND s.THEATER_PK =s2.THEATER_PK 
+AND r.SEAT_PK = s2.SEAT_PK 
+;
+
+SELECT * FROM RESERVATION;
+
+-- 예매 정보
 SELECT m.username ,pk.RESERVATION_PK, s.scr_pk, m.movie_name 
 FROM RESERVATION pk, SCREEN s, MOVIE m,MEMBER m
 WHERE pk.SCR_PK = s.scr_pk

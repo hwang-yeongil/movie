@@ -82,4 +82,9 @@ public class MemberController {
 		memberService.deleteId(id);
 		return "redirect:/members";
 	}
+	
+	@GetMapping("/test")
+	public String testpage() {
+		return "test";
+	}
 }
