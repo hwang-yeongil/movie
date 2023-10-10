@@ -1,41 +1,38 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml"
-	xmlns:th="http://www.thymeleaf.org"
+<html lang="ko" xmlns:th="http://www.thymeleaf.org"
 	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-	layout:decorate="~{layout/default_layout}">
+	layout:decorate="~{common/layout/defaultLayout}"
+	layout:fragment="Content">
+<head>
 
-<th:block layout:fragment="head">
-	<title>Spring Boot</title>
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>회원관리</title>
 
-	<!--/* css */-->
-	<link th:href="@{/css/common.css}" rel="stylesheet" />
-</th:block>
+</head>
 <body>
-	<th:block layout:fragment="header" th:include="@{/fragments/header}"></th:block>
+	<div id="container-main mt-3">
 
-	<div class="container">
-		<div>
-			<table>
-				<thead>
-					<tr>
-						<th>#</th>
-						<th>이름</th>
-					</tr>
-				</thead>
-				<tbody>
-					<tr th:each="member : ${members}">
-						<td th:text="${member.id}"></td>
-						<td th:text="${member.name}"></td>
-						<td th:text="${member.userpw}"></td>
-						<td th:text="${member.secession}"></td>
-						<td><a th:href="@{/member/delete(id=${member.id})}">삭제1</a></td>
-						<td><a th:href="@{/member/delete2(id=${member.id})}">삭제2</a></td>
-					<div th:if="${member.secession == 0}">
-					</div>
-					</tr>
-				</tbody>
-			</table>
-		</div>
+		<table class="table">
+			<thead>
+				<tr>
+					<th>#</th>
+					<th>이름</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr th:each="member : ${members}">
+					<td th:text="${member.id}"></td>
+					<td th:text="${member.name}"></td>
+					<td th:text="${member.userpw}"></td>
+					<td th:text="${member.secession}"></td>
+					<td><a th:href="@{/member/delete(id=${member.id})}">삭제1</a></td>
+					<td><a th:href="@{/member/delete2(id=${member.id})}">삭제2</a></td>
+					<div th:if="${member.secession == 0}"></div>
+				</tr>
+			</tbody>
+		</table>
 	</div>
 </body>
 </html>

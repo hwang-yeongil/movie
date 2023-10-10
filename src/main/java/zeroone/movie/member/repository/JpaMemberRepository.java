@@ -9,9 +9,8 @@ import org.springframework.stereotype.Repository;
 
 import zeroone.movie.member.domain.Member;
 
-
 public class JpaMemberRepository implements MemberRepository {
-	
+
 	private final EntityManager em;
 
 	public JpaMemberRepository(EntityManager em) {
@@ -48,5 +47,4 @@ public class JpaMemberRepository implements MemberRepository {
 		Member member = em.find(Member.class, id);
 		em.remove(member);
 	}
-
 }

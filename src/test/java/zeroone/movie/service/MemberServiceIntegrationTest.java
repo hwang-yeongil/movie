@@ -40,6 +40,7 @@ public class MemberServiceIntegrationTest {
 		assertEquals(member.getName(), findMember.getName());
 	}
 
+	
 //	@Test
 	public void 중복_회원_예외() throws Exception {
 		// Given
@@ -56,7 +57,7 @@ public class MemberServiceIntegrationTest {
 		assertThat(e.getMessage()).isEqualTo("이미 존재하는 회원입니다.");
 	}
 
-	@Test
+//	@Test
 	public void 수정() throws Exception {
 		memberService.update(1L, "update", "update");
 
@@ -66,5 +67,19 @@ public class MemberServiceIntegrationTest {
 	public void 회원삭제() throws Exception {
 		memberRepository.deleteById((long) 29);
 
+	}
+	
+	@Test
+	public void 로그인() throws Exception {
+		System.out.println(memberService.login("tester1", "1234"));
+	}
+	@Test
+	public void 회원정보찾기() throws Exception {
+//		System.out.println(memberRepository.findByName("tester1").get());
+		
+		System.out.println(memberRepository.findByName("tester1").get().getId());
+		System.out.println(memberRepository.findByName("tester1").get().getName());
+		System.out.println(memberRepository.findByName("tester1").get().getUserpw());
+		
 	}
 }

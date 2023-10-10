@@ -54,6 +54,7 @@ public class MemberService {
 	public void delete(Long id) {
 		memberRepository.deleteById(id);
 	}
+
 	public void deleteId(Long id) {
 		Optional<Member> member1 = memberRepository.findById(id);
 		member1.ifPresent(t -> {
@@ -65,9 +66,15 @@ public class MemberService {
 
 	public boolean login(String username, String userpw) {
 		Optional<Member> member = memberRepository.findByName(username);
-		if (member.get().getUserpw().equals(userpw) && member.get().getSecession()==0) {
-			return true;
+//		값의 존재 여부 확인
+		if (member.isPresent()) {
+			if (member.get().getUserpw().equals(userpw) && member.get().getSecession() == 0) {
+				System.out.println("_____________________________________");
+				return true;
+			}
 		}
+		System.out.println("=======================================");
 		return false;
 	}
+	
 }

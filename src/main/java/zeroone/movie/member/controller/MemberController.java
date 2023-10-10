@@ -37,18 +37,18 @@ public class MemberController {
 	public String create(MemberForm form) {
 
 		Member member = new Member();
-//		member.setId(2L);
 		member.setName(form.getName());
 		member.setUserpw(form.getUserpw());
-//		초기값 0으로 > 1일때 (관리자 / 삭제된 계정)
+		// 초기값 0으로 > 1일때 (관리자 / 삭제된 계정)
 		member.setAdmin(0);
 		member.setSecession(0);
 
 		memberService.join(member);
-
-		return "redirect:/";
+		
+		return "redirect:/members";
 	}
 
+	// 로그인
 	@GetMapping(value = "/members/login")
 	public String login() {
 		return "content/members/login";
@@ -57,9 +57,9 @@ public class MemberController {
 	@PostMapping(value = "/members/login")
 	public String login(@RequestParam String username, @RequestParam String userpw) {
 		if (memberService.login(username, userpw)) {
-			return "content/members/memberList";
+			return "redirect:/members";
 		}
-		return "content/members/login";
+		return "redirect:/members";
 	}
 
 	// 조회
@@ -74,17 +74,19 @@ public class MemberController {
 	@GetMapping("/member/delete")
 	public String memberDelete(Long id) {
 		memberService.delete(id);
-		return "redirect:/members";
+		return "content/members";
 	}
 
+	// 특정 게시물 삭제( db 상엔 그대로 유지 )
 	@GetMapping("/member/delete2")
 	public String memberDelete2(Long id) {
 		memberService.deleteId(id);
 		return "redirect:/members";
 	}
-	
-	@GetMapping("/test")
-	public String testpage() {
-		return "test";
+
+	@GetMapping("/home")
+	public String home() {
+		return "content/home";
 	}
+
 }

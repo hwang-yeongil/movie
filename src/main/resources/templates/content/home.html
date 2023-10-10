@@ -1,26 +1,20 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml"
-	xmlns:th="http://www.thymeleaf.org"
+<html xmlns:th="http://www.thymeleaf.org"
 	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-	layout:decorate="~{layout/default_layout}">
+	layout:decorate="~{common/layout/defaultLayout}"
+	layout:fragment="Content">
+<head>
+<title>Spring Boot</title>
+</head>
 
-<th:block layout:fragment="head">
-	<title>Spring Boot</title>
-
-	<!--/* css */-->
-	<link th:href="@{/css/common.css}" rel="stylesheet" />
-</th:block>
 <body>
-	<th:block layout:fragment="header" th:include="@{/fragments/header}"></th:block>
-
-	<div layout:fragment="content" class="content">
-		<h2>This is Content</h2>
+	<div class="container-fluid mt-3" id="container">
+		
+		<div class="row">
+			<div class="col p-3 bg-primary text-white" style="border: 1px solid black">.col</div>
+			<div class="col p-3 bg-dark text-white" style="border: 1px solid black">.col</div>
+			<div class="col p-3 bg-primary text-white" style="border: 1px solid black">.col</div>
+		</div>
 	</div>
-	<p></p>
-	<p>
-		<a href="/members/new">회원 가입</a>
-		<a href="/members">회원 목록</a>
-		<a href="/members/login">로그인</a>
-	</p>
 </body>
 </html>
