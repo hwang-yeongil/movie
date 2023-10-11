@@ -3,6 +3,7 @@ package zeroone.movie.member.controller;
 import java.util.List;
 import java.util.Optional;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -57,10 +58,8 @@ public class MemberController {
 	}
 
 	@PostMapping(value = "/members/login")
-	public String login(@RequestParam String username, @RequestParam String userpw, Model model) {
+	public String login(@RequestParam String username, @RequestParam String userpw, @ModelAttribute Member member,HttpServletRequest request) {
 		if (memberService.login(username, userpw)) {
-			model.addAttribute("username", username);
-			model.addAttribute("userpw", userpw);
 			
 			return "content/home";
 		}
@@ -70,7 +69,10 @@ public class MemberController {
 //	마이페이지
 	@GetMapping("/members/myPage")
 	public String myPage() {
+		System.out.println();
+		
 		return "content/members/myPage";
+		
 	}
 	
 	
