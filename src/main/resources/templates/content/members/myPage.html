@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="~{common/layout/defaultLayout}"
+	layout:fragment="Content">
+<head>
+<title>Spring Boot</title>
+</head>
+
+<body>
+	<div class="container-fluid mt-3" id="container-main">
+		
+		<div class="row">
+			<div class="col- bg-success bg-primary text-white" style="border: 1px solid black">.col
+				<h1 th:text="${username}"></h1>
+			</div>
+		</div>
+	</div>
+</body>
+</html>

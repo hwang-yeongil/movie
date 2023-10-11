@@ -1,12 +1,29 @@
-<!DOCTYPE HTML>
-<html>
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="~{common/layout/defaultLayout}"
+	layout:fragment="Content">
 <head>
-	<title>hello</title>
-	<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+<title>Spring Boot</title>
 </head>
+
 <body>
-<th:block layout:fragment="header" th:include="@{/fragments/header}"></th:block>
-hello
-<a href="/hello">hello</a>
+	<div class="container-fluid mt-3" id="container-main">
+		
+		<div class="row">
+			<div class="col- bg-success bg-primary text-white" style="border: 1px solid black">.col
+				<p>영화제목 1</p>
+				<button type="button" class="btn btn-primary">예매하기</button>
+			</div>
+			<div class="col- bg-success bg-primary text-white" style="border: 1px solid black">.col
+				<p>영화제목 2</p>
+				<button type="button" class="btn btn-primary">예매하기</button>
+			</div>
+			<div class="col- bg-success bg-primary text-white" style="border: 1px solid black">
+				<p>영화제목 3</p>
+				<button type="button" class="btn btn-primary">예매하기</button>
+			</div>
+		</div>
+	</div>
 </body>
 </html>

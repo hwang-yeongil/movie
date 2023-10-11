@@ -3,6 +3,8 @@ package zeroone.movie.member.controller;
 import java.util.List;
 import java.util.Optional;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -55,14 +57,24 @@ public class MemberController {
 	}
 
 	@PostMapping(value = "/members/login")
-	public String login(@RequestParam String username, @RequestParam String userpw) {
+	public String login(@RequestParam String username, @RequestParam String userpw, Model model) {
 		if (memberService.login(username, userpw)) {
-			return "redirect:/members";
+			model.addAttribute("username", username);
+			model.addAttribute("userpw", userpw);
+			
+			return "content/home";
 		}
-		return "redirect:/members";
+		return "content/members/login";
 	}
-
-	// 조회
+	
+//	마이페이지
+	@GetMapping("/members/myPage")
+	public String myPage() {
+		return "content/members/myPage";
+	}
+	
+	
+	// 관리자 조회
 	@GetMapping(value = "/members")
 	public String list(Model model) {
 		List<Member> members = memberService.findMembers();
@@ -70,14 +82,14 @@ public class MemberController {
 		return "content/members/memberList";
 	}
 
-	// 특정 게시물 삭제
+	// 특정 유저 삭제
 	@GetMapping("/member/delete")
 	public String memberDelete(Long id) {
 		memberService.delete(id);
 		return "content/members";
 	}
 
-	// 특정 게시물 삭제( db 상엔 그대로 유지 )
+	// 특정 유저 삭제( db 상엔 그대로 유지 )
 	@GetMapping("/member/delete2")
 	public String memberDelete2(Long id) {
 		memberService.deleteId(id);

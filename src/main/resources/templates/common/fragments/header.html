@@ -1,9 +1,9 @@
 <html
 	xmlns:th="http://www.thymeleaf.org"
 	th:fragment="HeaderFragment">
-<div class="header" style="position: fixed; top:0;left: 0;
-  right: 0;">
-	<div class="container-fluid mt-3">
+<div class="header" style="top:0;left: 0; border-bottom: solid 1px black;
+  right: 0; height:5%">
+	<div class="container-fluid">
 		<div class="row">
 			<div class="col">
 				<ul class="nav">
@@ -12,11 +12,12 @@
 			</div>
 			<div class="col">
 				<ul class="nav justify-content-end">
+					<li class="nav-item"><a class="nav-link disabled" href="#">영화</a></li>
+					<li class="nav-item"><a class="nav-link disabled" href="#">예매</a></li>
 					<li class="nav-item"><a class="nav-link" href="/members/new">회원가입</a></li>
 					<li class="nav-item"><a class="nav-link" href="/members/login">로그인</a></li>
 					<li class="nav-item"><a class="nav-link" href="/members">회원목록</a></li>
-					<li class="nav-item"><a class="nav-link disabled" href="#">Disabled</a>
-					</li>
+					<li class="nav-item"><a class="nav-link" href="/members/myPage">MyPage</a></li>
 				</ul>
 			</div>
 		</div>
