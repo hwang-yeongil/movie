@@ -9,7 +9,7 @@ import zeroone.movie.member.domain.Member;
 public interface SpringDataJpaMemberRepository extends JpaRepository<Member, Long>, MemberRepository{
 	
 	@Override
-	Optional<Member> findByName(String name);
+	Optional<Member> findByUsername(String username);
 	void deleteById(Long id);
 //	Member update(Long id);
 }

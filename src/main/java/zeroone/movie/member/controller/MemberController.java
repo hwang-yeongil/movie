@@ -13,6 +13,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.SessionAttribute;
+import org.springframework.web.servlet.ModelAndView;
 
 import zeroone.movie.member.domain.Member;
 import zeroone.movie.member.repository.MemberRepository;
@@ -40,42 +42,48 @@ public class MemberController {
 	public String create(MemberForm form) {
 
 		Member member = new Member();
-		member.setName(form.getName());
+		member.setUsername(form.getName());
 		member.setUserpw(form.getUserpw());
 		// 초기값 0으로 > 1일때 (관리자 / 삭제된 계정)
 		member.setAdmin(0);
 		member.setSecession(0);
 
 		memberService.join(member);
-		
+
 		return "redirect:/members";
 	}
 
 	// 로그인
 	@GetMapping(value = "/members/login")
-	public String login() {
+	public String login(Model model) {
+		model.addAttribute("member", new Member());
 		return "content/members/login";
 	}
 
 	@PostMapping(value = "/members/login")
-	public String login(@RequestParam String username, @RequestParam String userpw, @ModelAttribute Member member,HttpServletRequest request) {
-		if (memberService.login(username, userpw)) {
-			
-			return "content/home";
+	public String login(@ModelAttribute Member member, HttpServletRequest request) throws Exception {
+		if (memberService.login(member.getUsername(), member.getUserpw())) {
+			HttpSession session = request.getSession();
+			session.setAttribute("member", member);
+
+		} else {
+			return "../login";
 		}
-		return "content/members/login";
+		return "../myPage";
 	}
-	
+
 //	마이페이지
 	@GetMapping("/members/myPage")
-	public String myPage() {
-		System.out.println();
-		
+	public String myPage(@SessionAttribute(name = "member", required = false) Member member, Model model) {
+		if (member == null) {
+			return "/members/login";
+		}
+		model.addAttribute("member", member);
+
 		return "content/members/myPage";
-		
+
 	}
-	
-	
+
 	// 관리자 조회
 	@GetMapping(value = "/members")
 	public String list(Model model) {

@@ -30,9 +30,9 @@ public class JpaMemberRepository implements MemberRepository {
 	}
 
 	@Override
-	public Optional<Member> findByName(String name) {
-		List<Member> result = em.createQuery("select m from Member m where m.name = :name", Member.class)
-				.setParameter("name", name).getResultList();
+	public Optional<Member> findByUsername(String username) {
+		List<Member> result = em.createQuery("select m from Member m where m.username = :username", Member.class)
+				.setParameter("username", username).getResultList();
 		return result.stream().findAny();
 	}
 

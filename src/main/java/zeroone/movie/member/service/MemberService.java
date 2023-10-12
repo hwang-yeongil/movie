@@ -30,14 +30,14 @@ public class MemberService {
 	public void update(Long id, String username, String userpw) {
 		Optional<Member> member = memberRepository.findById(id);
 		member.ifPresent(selectUser -> {
-			selectUser.setName(username);
+			selectUser.setUsername(username);
 			selectUser.setUserpw(userpw);
 			memberRepository.save(selectUser);
 		});
 	}
 
 	private void validateDuplicateMember(Member member) { // 중복 회원
-		memberRepository.findByName(member.getName()).ifPresent(m -> {
+		memberRepository.findByUsername(member.getUsername()).ifPresent(m -> {
 			throw new IllegalStateException("이미 존재하는 회원입니다.");
 		});
 	}
@@ -65,7 +65,7 @@ public class MemberService {
 	}
 
 	public boolean login(String username, String userpw) {
-		Optional<Member> member = memberRepository.findByName(username);
+		Optional<Member> member = memberRepository.findByUsername(username);
 //		값의 존재 여부 확인
 		if (member.isPresent()) {
 			if (member.get().getUserpw().equals(userpw) && member.get().getSecession() == 0) {

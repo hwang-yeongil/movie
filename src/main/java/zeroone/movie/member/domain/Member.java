@@ -16,8 +16,7 @@ public class Member implements Serializable{
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "SequenceGeneratorName")
 	@SequenceGenerator(sequenceName = "SequenceName", name = "SequenceGeneratorName", allocationSize = 1)
 	private Long id;
-	@Column(name = "USERNAME")
-	private String name;
+	private String username;
 	private String userpw;
 	private int admin;
 	private int secession;
@@ -47,12 +46,12 @@ public class Member implements Serializable{
 		this.id = id;
 	}
 	
-	public String getName() {
-		return name;
+	public String getUsername() {
+		return username;
 	}
 	
-	public void setName(String name) {
-		this.name = name;
+	public void setUsername(String username) {
+		this.username = username;
 	}
 
 	public String getUserpw() {

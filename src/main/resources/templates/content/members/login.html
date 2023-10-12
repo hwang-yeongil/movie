@@ -21,14 +21,14 @@
 			<div id="loginBoxTitle">Login</div>
 			<!-- 아이디, 비번, 버튼 박스 -->
 			<div id="inputBox">
-				<form action="/members/login" method="post">
+				<form th:action="@{content/members/login}" th:object="${member}" data-sb-form-api-token="API_TOKEN" method="post">
 
 					<div class="input-form-box">
-						<span>아이디 </span><input type="text" name="username"
+						<span>아이디 </span><input type="text" th:field="*{username}" data-sb-validations="required"
 							class="form-control">
 					</div>
 					<div class="input-form-box">
-						<span>비밀번호 </span><input type="password" name="userpw"
+						<span>비밀번호 </span><input type="password" th:field="*{userpw}"
 							class="form-control">
 					</div>
 					<div class="button-login-box">
@@ -49,3 +49,23 @@
 
 </body>
 </html>
+
+<!--
+<div id="inputBox">
+				<form th:action="@{/members/login}" th:object="${member}" method="post">
+
+					<div class="input-form-box">
+						<span>아이디 </span><input type="text" name="username"
+							class="form-control">
+					</div>
+					<div class="input-form-box">
+						<span>비밀번호 </span><input type="password" name="userpw"
+							class="form-control">
+					</div>
+					<div class="button-login-box">
+						<button type="submit" class="btn btn-primary btn-xs"
+							style="width: 100%">로그인</button>
+					</div>
+				</form>
+			</div>
+-->

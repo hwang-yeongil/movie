@@ -27,7 +27,7 @@ public class MemberServiceIntegrationTest {
 //	@Test
 	public void 회원가입() throws Exception {
 		Member member = new Member();
-		member.setName("hello111");
+		member.setUsername("hello111");
 		member.setUserpw("hello");
 //		member.setId(10L);
 //		System.out.println(member.getName());
@@ -37,7 +37,7 @@ public class MemberServiceIntegrationTest {
 		Long saveId = memberService.join(member);
 
 		Member findMember = memberRepository.findById(saveId).get();
-		assertEquals(member.getName(), findMember.getName());
+		assertEquals(member.getUsername(), findMember.getUsername());
 	}
 
 	
@@ -45,10 +45,10 @@ public class MemberServiceIntegrationTest {
 	public void 중복_회원_예외() throws Exception {
 		// Given
 		Member member1 = new Member();
-		member1.setName("spring");
+		member1.setUsername("spring");
 
 		Member member2 = new Member();
-		member2.setName("spring");
+		member2.setUsername("spring");
 
 		// when
 		memberService.join(member1);
@@ -77,9 +77,9 @@ public class MemberServiceIntegrationTest {
 	public void 회원정보찾기() throws Exception {
 //		System.out.println(memberRepository.findByName("tester1").get());
 		
-		System.out.println(memberRepository.findByName("tester1").get().getId());
-		System.out.println(memberRepository.findByName("tester1").get().getName());
-		System.out.println(memberRepository.findByName("tester1").get().getUserpw());
+		System.out.println(memberRepository.findByUsername("tester1").get().getId());
+		System.out.println(memberRepository.findByUsername("tester1").get().getUsername());
+		System.out.println(memberRepository.findByUsername("tester1").get().getUserpw());
 		
 	}
 }
