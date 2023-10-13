@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="ko" xmlns:th="http://www.thymeleaf.org"
 	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
 	layout:decorate="~{common/layout/defaultLayout}"
 	layout:fragment="Content">
 <head>
@@ -21,14 +22,18 @@
 			<div id="loginBoxTitle">Login</div>
 			<!-- 아이디, 비번, 버튼 박스 -->
 			<div id="inputBox">
-				<form th:action="@{content/members/login}" th:object="${member}" data-sb-form-api-token="API_TOKEN" method="post">
+			
+				
+			
+			
+				<form th:action="@{/login}" method="post">
 
 					<div class="input-form-box">
-						<span>아이디 </span><input type="text" th:field="*{username}" data-sb-validations="required"
+						<span>아이디 </span><input id="username" name="username" type="text"  data-sb-validations="required"
 							class="form-control">
 					</div>
 					<div class="input-form-box">
-						<span>비밀번호 </span><input type="password" th:field="*{userpw}"
+						<span>비밀번호 </span><input id="userpw" name="userpw" type="password" 
 							class="form-control">
 					</div>
 					<div class="button-login-box">

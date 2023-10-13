@@ -4,26 +4,31 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import lombok.RequiredArgsConstructor;
 import zeroone.movie.member.domain.Member;
 import zeroone.movie.member.repository.MemberRepository;
 
 //@Service
 @Transactional
+@RequiredArgsConstructor
 public class MemberService {
 
 //	@Autowired
-	private MemberRepository memberRepository;
+	private final MemberRepository memberRepository;
+	
 
-	public MemberService(MemberRepository memberRepository) {
-		this.memberRepository = memberRepository;
-	}
+//	public MemberService(MemberRepository memberRepository) {
+//		this.memberRepository = memberRepository;
+//	}
 
 	public Long join(Member member) {
 
 		validateDuplicateMember(member);
+		
 		return memberRepository.save(member).getId();
 	}
 

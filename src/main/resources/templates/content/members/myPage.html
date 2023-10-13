@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org"
 	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
 	layout:decorate="~{common/layout/defaultLayout}"
 	layout:fragment="Content">
 <head>
@@ -15,6 +16,11 @@
 				<h1 th:text="${username}"></h1>
 			</div>
 		</div>
+		<!-- use Security -->
+		<form class="form-inline my-2 my-lg-0" form-method="post" th:action="@{/logout}">
+		    <button sec:authorize="isAuthenticated()" class="btn btn-outline-danger my-2 my-sm-0 btn-sm" type="submit">Logout</button>
+		    <button sec:authorize="isAnonymous()" th:href="@{/login}" class="btn btn-outline-info my-2 my-sm-0 btn-sm" type="submit">Login</button>
+		</form>
 	</div>
 </body>
 </html>

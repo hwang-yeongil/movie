@@ -1,7 +1,7 @@
 CREATE TABLE MEMBER(
 	id NUMBER NOT NULL PRIMARY key,
 	username varchar2(50) NOT NULL,
-	userpw varchar2(50) NOT NULL,
+	userpw varchar2(100) NOT NULL,
 	admin char(4) NOT NULL,
 	secession char(4) NOT NULL
 );
@@ -183,3 +183,6 @@ WHERE pk.SCR_PK = s.scr_pk
 AND s.movie_pk = m.movie_pk
 AND pk.USERID =m.id
 	;	
+	
+
+SELECT * FROM MEMBER;

@@ -9,7 +9,10 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.SequenceGenerator;
 
+import lombok.Data;
+
 @Entity
+@Data
 public class Member implements Serializable{
 	
 	@Id
@@ -21,44 +24,44 @@ public class Member implements Serializable{
 	private int admin;
 	private int secession;
 
-	public int getAdmin() {
-		return admin;
-	}
-
-	public void setAdmin(int admin) {
-		this.admin = admin;
-	}
-
-	public int getSecession() {
-		return secession;
-	}
-
-	public void setSecession(int secession) {
-		this.secession = secession;
-	}
-
-
-	public Long getId() {
-		return id;
-	}
-	
-	public void setId(Long id) {
-		this.id = id;
-	}
-	
-	public String getUsername() {
-		return username;
-	}
-	
-	public void setUsername(String username) {
-		this.username = username;
-	}
-
-	public String getUserpw() {
-		return userpw;
-	}
-
-	public void setUserpw(String userpw) {
-		this.userpw = userpw;
-	}
+//	public int getAdmin() {
+//		return admin;
+//	}
+//
+//	public void setAdmin(int admin) {
+//		this.admin = admin;
+//	}
+//
+//	public int getSecession() {
+//		return secession;
+//	}
+//
+//	public void setSecession(int secession) {
+//		this.secession = secession;
+//	}
+//
+//
+//	public Long getId() {
+//		return id;
+//	}
+//	
+//	public void setId(Long id) {
+//		this.id = id;
+//	}
+//	
+//	public String getUsername() {
+//		return username;
+//	}
+//	
+//	public void setUsername(String username) {
+//		this.username = username;
+//	}
+//
+//	public String getUserpw() {
+//		return userpw;
+//	}
+//
+//	public void setUserpw(String userpw) {
+//		this.userpw = userpw;
+//	}
 }
