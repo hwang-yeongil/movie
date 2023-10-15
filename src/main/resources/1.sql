@@ -2,7 +2,14 @@ CREATE TABLE MEMBER(
 	id NUMBER NOT NULL PRIMARY key,
 	username varchar2(50) NOT NULL,
 	userpw varchar2(100) NOT NULL,
-	admin char(4) NOT NULL,
+	role varchar2(50) NOT NULL,
+	secession char(4) NOT NULL
+);
+
+CREATE TABLE MEMBER(
+	id varchar2(50) NOT NULL PRIMARY key,
+	userpw varchar2(100) NOT NULL,
+	role varchar2(50) NOT NULL,
 	secession char(4) NOT NULL
 );
 

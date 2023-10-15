@@ -2,27 +2,42 @@ package zeroone.movie.member.domain;
 
 import java.io.Serializable;
 
-import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.SequenceGenerator;
 
-import lombok.Data;
+import org.hibernate.annotations.DynamicUpdate;
+import lombok.AccessLevel;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
+@Getter
 @Entity
-@Data
+@Builder
+@AllArgsConstructor
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class Member implements Serializable{
 	
+//	@Id
+//	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "SequenceGeneratorName")
+//	@SequenceGenerator(sequenceName = "SequenceName", name = "SequenceGeneratorName", allocationSize = 1)
+	
 	@Id
-	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "SequenceGeneratorName")
-	@SequenceGenerator(sequenceName = "SequenceName", name = "SequenceGeneratorName", allocationSize = 1)
-	private Long id;
-	private String username;
+	private String id;
 	private String userpw;
-	private int admin;
 	private int secession;
+	
+	@Enumerated(EnumType.STRING)
+	private Role role;
+	
+
 
 //	public int getAdmin() {
 //		return admin;

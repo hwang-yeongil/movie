@@ -1,3 +1,4 @@
+/*
 package zeroone.movie.member.repository;
 
 import java.util.Optional;
@@ -13,3 +14,4 @@ public interface SpringDataJpaMemberRepository extends JpaRepository<Member, Lon
 	void deleteById(Long id);
 //	Member update(Long id);
 }
+*/
