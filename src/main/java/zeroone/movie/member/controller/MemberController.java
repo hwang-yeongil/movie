@@ -23,17 +23,11 @@ import zeroone.movie.member.repository.MemberRepository;
 import zeroone.movie.member.service.MemberService;
 
 @Controller
-//@RequestMapping(value = "/members")
 @RequiredArgsConstructor
 public class MemberController {
 
 	private final MemberService memberService;
 	private final MemberRepository memberRepository;
-
-	@GetMapping("/")
-	public String home() {
-		return "/content/home";
-	}
 	
 	@GetMapping(value = "/signup")
 	public String createForm() {

@@ -12,7 +12,7 @@ CREATE TABLE MEMBER(
 	role varchar2(50) NOT NULL,
 	secession char(4) NOT NULL
 );
-
+SELECT * FROM MEMBER;
 
 CREATE TABLE movie(
 	movie_pk NUMBER NOT NULL PRIMARY key,
@@ -50,17 +50,18 @@ INSERT INTO SCREEN VALUES (4,2,TO_DATE('23/12/03 12:00', 'YY/MM/DD HH24:MI'));
 CREATE TABLE review(
 	review_pk NUMBER NOT NULL PRIMARY key,
 	movie_pk NUMBER NOT NULL,
-	userid NUMBER NOT NULL,
+	member_id varchar2(50) NOT NULL,
+  	rv_star NUMBER NOT NULL,
 	rv_date DATE NOT NULL,
 	rv_content varchar2(1000) NOT NULL,
 	rv_title varchar2(50) NOT NULL,
-	CONSTRAINT rv_userid_fk foreign key(userid) references member (id),
+	CONSTRAINT rv_userid_fk foreign key(member_id) references member (id),
 	CONSTRAINT rv_movie_fk foreign key(movie_pk) references movie (movie_pk)
 );
 
 CREATE TABLE reservation(
 	reservation_pk NUMBER NOT NULL PRIMARY key,
-	userid NUMBER NOT NULL,
+	userid varchar2(50) NOT NULL,
 	scr_pk NUMBER NOT NULL,
 	seat_pk NUMBER NOT NULL,
 	reserv_date date NOT NULL,
@@ -70,13 +71,13 @@ CREATE TABLE reservation(
 );
 
 
-INSERT INTO "MEMBER" VALUES(1, 'admin','admin','1','0');
-INSERT INTO "MEMBER" VALUES(2, 'tester1','1234','0','0');
-INSERT INTO "MEMBER" VALUES(3, 'tester2','1234','0','0');
-INSERT INTO "MEMBER" VALUES(4, 'tester3','1234','0','0');
-INSERT INTO "MEMBER" VALUES(5, 'tester4','1234','0','0');
-INSERT INTO "MEMBER" VALUES(6, 'tester5','1234','0','0');
-INSERT INTO "MEMBER" VALUES(7, 'tester6','1234','0','0');
+INSERT INTO "MEMBER" VALUES('admin','admin','1','0');
+INSERT INTO "MEMBER" VALUES('tester1','1234','0','0');
+INSERT INTO "MEMBER" VALUES('tester2','1234','0','0');
+INSERT INTO "MEMBER" VALUES('tester3','1234','0','0');
+INSERT INTO "MEMBER" VALUES('tester4','1234','0','0');
+INSERT INTO "MEMBER" VALUES('tester5','1234','0','0');
+INSERT INTO "MEMBER" VALUES('tester6','1234','0','0');
 
 INSERT INTO MOVIE VALUES (1,'오펜하이머');
 INSERT INTO MOVIE VALUES (2,'천박사 퇴마 연구소');
@@ -193,3 +194,4 @@ AND pk.USERID =m.id
 	
 
 SELECT * FROM MEMBER;
+SELECT * FROM review;

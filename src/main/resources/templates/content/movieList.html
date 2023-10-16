@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
+	layout:decorate="~{common/layout/defaultLayout}"
+	layout:fragment="Content">
+<head>
+<title>Spring Boot</title>
+</head>
+
+<body>
+	<div id="container-main" class="mt-5">
+
+		<table class="table">
+			<thead>
+				<tr>
+					<th>#</th>
+					<th>이름</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr th:each="movie : ${movies}">
+					<td th:text="${movie.movie_pk}"></td>
+					<td th:text="${movie.movie_name}"
+					th:onclick="|location.href='@{/addReview(id=${movie.movie_pk})}'|"></td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+</body>
+</html>
