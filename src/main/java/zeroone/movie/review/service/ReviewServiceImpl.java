@@ -1,6 +1,7 @@
 package zeroone.movie.review.service;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -18,6 +19,8 @@ import zeroone.movie.movie.domain.Movie;
 import zeroone.movie.movie.repository.MovieRepository;
 import zeroone.movie.review.domain.Review;
 import zeroone.movie.review.dto.AddReviewFormDto;
+import zeroone.movie.review.dto.DetailDto;
+import zeroone.movie.review.dto.ReviewListDto;
 import zeroone.movie.review.repository.ReviewRepository;
 
 @Service
@@ -58,11 +61,46 @@ public class ReviewServiceImpl implements ReviewService{
 	}
 	
 	@Override
-	public List<Review> findListbyid(Long id) {
+	public List<ReviewListDto> getAll() {
 		// TODO Auto-generated method stub
-		return em.createQuery("select r from Review r where r.movie_pk = :id")
-			.setParameter("id", id)
-			.getResultList();
+		List<Review> reviews = reviewRepository.findAll();
+		List<ReviewListDto> list = new ArrayList<>();
 		
+		for(Review review : reviews) {
+			Member member = review.getMember();
+			
+			ReviewListDto dto = ReviewListDto.builder()
+					.review_pk(review.getReview_pk())
+					.rv_title(review.getRv_title())
+					.rv_date(review.getRv_date())
+					.rv_star(review.getRv_star())
+					.member_id(member.getId())
+					.build();
+			
+			list.add(dto);
+		}
+		return list;
 	}
+	
+	@Override
+	public DetailDto getDetail(Long id) {
+		// TODO Auto-generated method stub
+		Optional<Review> review = reviewRepository.findById(id);
+		Review reviewEntity = review.orElse(null);
+		
+		Member member = reviewEntity.getMember();
+		
+		DetailDto dto = DetailDto.builder()
+				.review_pk(reviewEntity.getReview_pk())
+				.rv_title(reviewEntity.getRv_title())
+				.rv_content(reviewEntity.getRv_content())
+				.rv_date(reviewEntity.getRv_date())
+				.rv_star(reviewEntity.getRv_star())
+//				.member_id(member.getId())
+				.build();
+		
+		return dto;
+	}
+	
+	
 }

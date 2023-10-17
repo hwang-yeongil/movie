@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="~{common/layout/defaultLayout}" layout:fragment="Content">
+
+<head>
+	<title>회원관리</title>
+</head>
+
+<body>
+	<div id="container-main" class="mt-5">
+		<h1 th:text="${review.rv_title}"></h1>
+		<div id="content-box">
+			<div>글번호 : <span th:text="${review.review_pk}"></span></div>
+			<div>등록 일시 : <span th:text="${review.rv_date}"></span></div>
+
+			<div>별점 : <span th:text="${review.rv_star}"></span></div>
+			<div>글 내용</div>
+			<div id="line" th:text="${review.rv_content}"></div>
+		</div>
+		<div>
+			<button id="update" type="button">수정</button>
+			<button id="remove" type="button">삭제</button>
+		</div>
+
+	</div>
+</body>
+
+</html>

@@ -12,7 +12,6 @@
 		<button type="button" class="btn btn-primary"
 			th:onclick="|location.href='@{/addReview(id=${param.id})}'|">
 			리뷰 작성</button>
-		<p> ${param.id}</p>
 		<table class="table">
 			<thead>
 				<tr>
@@ -23,13 +22,12 @@
 
 			<tbody>
 
-				<tr th:each="review : ${reviews}" 
-				th:onclick="'location.href=\''+ @{/{id}(id=${review.review_pk})} + '\''">
-					<td scope="row" width="10%"><div th:text="${review.review_pk}"></div></td>
-					<td scope="row" width="10%"><div th:text="${review.movie.movie_name}"></div></td>
-					<td scope="row" width="10%"><div th:text="${review.rv_title}"></div></td>
-					<td scope="row" width="10%"><div th:text="${review.rv_star}"></div></td>
-					<td scope="row" width="10%"><div th:text="${review.member.id}"></div></td>
+				<tr th:each="review : ${reviews}">
+					<td th:text="${review.member_id}"></td>
+					<td th:text="${review.rv_title}"></td>
+					<td th:text="${review.rv_star}"></td>
+					<td th:text="${review.rv_date}"></td>
+					
 				</tr>
 			</tbody>
 		</table>

@@ -22,7 +22,7 @@
 				<tr th:each="movie : ${movies}">
 					<td th:text="${movie.movie_pk}"></td>
 					<td th:text="${movie.movie_name}"
-					th:onclick="|location.href='@{/addReview(id=${movie.movie_pk})}'|"></td>
+					th:onclick="|location.href='@{/reviewList(id=${movie.movie_pk})}'|"></td>
 				</tr>
 			</tbody>
 		</table>
