@@ -23,7 +23,7 @@ import lombok.Setter;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
-public class Member implements Serializable{
+public class Member{
 	
 //	@Id
 //	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "SequenceGeneratorName")
@@ -36,47 +36,4 @@ public class Member implements Serializable{
 	
 	@Enumerated(EnumType.STRING)
 	private Role role;
-	
-
-
-//	public int getAdmin() {
-//		return admin;
-//	}
-//
-//	public void setAdmin(int admin) {
-//		this.admin = admin;
-//	}
-//
-//	public int getSecession() {
-//		return secession;
-//	}
-//
-//	public void setSecession(int secession) {
-//		this.secession = secession;
-//	}
-//
-//
-//	public Long getId() {
-//		return id;
-//	}
-//	
-//	public void setId(Long id) {
-//		this.id = id;
-//	}
-//	
-//	public String getUsername() {
-//		return username;
-//	}
-//	
-//	public void setUsername(String username) {
-//		this.username = username;
-//	}
-//
-//	public String getUserpw() {
-//		return userpw;
-//	}
-//
-//	public void setUserpw(String userpw) {
-//		this.userpw = userpw;
-//	}
 }

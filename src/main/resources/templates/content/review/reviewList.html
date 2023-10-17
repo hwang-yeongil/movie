@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="~{common/layout/defaultLayout}"
+	layout:fragment="Content">
+<head>
+<title>회원관리</title>
+</head>
+<body>
+	<div id="container-main" class="mt-5">
+
+		<button type="button" class="btn btn-primary"
+			th:onclick="|location.href='@{/addReview(id=${param.id})}'|">
+			리뷰 작성</button>
+		<p> ${param.id}</p>
+		<table class="table">
+			<thead>
+				<tr>
+					<th>#</th>
+					<th>이름</th>
+				</tr>
+			</thead>
+
+			<tbody>
+
+				<tr th:each="review : ${reviews}">
+					<td th:text="${review.movie.movie_name}"></td>
+					<td th:text="${review.rv_title}"></td>
+					<td th:text="${review.rv_star}"></td>
+				</div>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+</body>
+</html>

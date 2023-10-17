@@ -16,7 +16,7 @@
 				<p th:text="${movie.movie_name}"></p>
 				<button type="button" class="btn btn-primary">예매하기</button>
 				<button type="button" class="btn btn-primary"
-				th:onclick="|location.href='@{/addReview(id=${movie.movie_pk})}'|">리뷰작성</button>
+				th:onclick="|location.href='@{/reviewList(id=${movie.movie_pk})}'|">리뷰</button>
 			</div>
 			
 		</div>

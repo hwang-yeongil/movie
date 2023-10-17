@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
+	layout:decorate="~{common/layout/defaultLayout}"
+	layout:fragment="Content">
+<head>
+    <title th:text="등록"></title>
+</head>
+<body>
+<th:block layout:fragment="content">
+    <div>
+        <h2>새 글 작성</h2>
+        <div>
+        	<input type="hidden" name="movie_pk" id="movie_pk" th:value=${param.id}>
+        	
+        	<select name="rv_star" id="rv_star">
+				<option value="1">1</option>
+				<option value="2">2</option>
+				<option value="3">3</option>
+				<option value="4">4</option>
+				<option value="5">5</option>
+			</select>
+        	
+        	
+        	
+            <label for="title">제목</label>
+            <input title="글제목" type="text" name="rv_title" id="rv_title"/>
+        </div>
+        <div class="content-box">
+            <label>내용</label>
+            <textarea class="rv_content" name="rv_content"
+                      rows="10" cols="50"></textarea>
+        </div>
+        <button id="save" type="button">저장</button>
+    </div>
+</th:block>
+<th:block layout:fragment="script">
+    <script type="text/javascript">
+
+        $(function () {
+            $('#save').click((event) => {
+                const rv_title = $('#rv_title').val();
+                const rv_content = $('.rv_content').val();
+                const rv_star = $('#rv_star').val();
+                const movie_pk = $('#movie_pk').val();
+                const member_id = localStorage.getItem("id");
+                if (rv_title == '') {
+                    alert('제목을 입력해주세요');
+                    return;
+                }
+                if (rv_content == '') {
+                    alert('내용을 입력해주세요');
+                    return;
+                }
+                if (rv_star == '') {
+                	rv_star = 1;
+                }
+                
+
+
+                const path = 'http://localhost:8881/api/addReview';
+                const json = JSON.stringify({
+                    'rv_title': rv_title,
+                    'rv_content': rv_content,
+                    'member_id': member_id,
+                    'movie_pk' : movie_pk,
+                    'rv_star' : rv_star
+                });
+                $.ajax({
+                    url: path,
+                    type: 'POST',
+                    contentType: 'application/json',
+                    data: json,
+                }).done((response) => {
+                    console.log(response);
+                    if (response == 'success') {
+                        alert('등록 성공')
+                        location.href = "http://localhost:8881"
+                    } else {
+                        alert(response);
+                    }
+                });
+            });
+        });
+    </script>
+</th:block>
+</body>
+</html>

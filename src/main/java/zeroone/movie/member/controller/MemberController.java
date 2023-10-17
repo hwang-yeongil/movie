@@ -66,7 +66,6 @@ public class MemberController {
 //		memberService.delete(id);
 //		return "content/members";
 //	}
-//
 //	// 특정 유저 삭제( db 상엔 그대로 유지 )
 	@GetMapping("/delete2")
 	public String memberDelete2(String id) {

@@ -1,7 +1,10 @@
 package zeroone.movie.review.service;
 
 import java.time.LocalDateTime;
+import java.util.List;
 import java.util.Optional;
+
+import javax.persistence.EntityManager;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -25,6 +28,7 @@ public class ReviewServiceImpl implements ReviewService{
 	private final MemberRepository memberRepository;
 	private final ReviewRepository reviewRepository;
 	private final MovieRepository movieRepository;
+	private final EntityManager em;
 	
 	@Override
 	public ResponseEntity save(AddReviewFormDto formDto) {
@@ -46,10 +50,19 @@ public class ReviewServiceImpl implements ReviewService{
 				.build();
 			
 			reviewRepository.save(review);
-			
+			 
 			return new ResponseEntity("success", HttpStatus.OK);
 		}else {
 			return new ResponseEntity("fail", HttpStatus.BAD_REQUEST);
 		}
+	}
+	
+	@Override
+	public List<Review> findListbyid(Long id) {
+		// TODO Auto-generated method stub
+		return em.createQuery("select r from Review r where r.movie_pk = :id")
+			.setParameter("id", id)
+			.getResultList();
+		
 	}
 }
