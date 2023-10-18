@@ -27,8 +27,8 @@ import zeroone.movie.review.service.ReviewService;
 @RequiredArgsConstructor
 public class ReviewController {
 	
-	private MovieService movieService;
-	private ReviewService reviewService;
+	private final MovieService movieService;
+	private final ReviewService reviewService;
 	
 	@Autowired
 	ReviewRepository reviewRepository;
@@ -41,10 +41,20 @@ public class ReviewController {
 	
 	@GetMapping("/reviewList")
 	public String reviewList(Model model) {
-		List<Review> reviews = reviewRepository.findAll();
+		List<ReviewListDto> reviews = reviewService.getAll();
 		model.addAttribute("reviews", reviews);
 		return "content/review/reviewList";
 	}
+	
+	@GetMapping("/reviewList/{id}")
+	public String reviewList1(@PathVariable Long id, Model model) {
+		List<ReviewListDto> reviews = reviewService.getAllPk(id);
+		model.addAttribute("reviews", reviews);
+		return "content/review/reviewList1";
+
+	}
+	
+	
 	
 	@GetMapping("/{id}")
 	public String detail(@PathVariable Long id, Model model) {
@@ -54,16 +64,20 @@ public class ReviewController {
 	}
 	
 //	test
-	@GetMapping("/reviewList1")
-	public String reviewList1(Model model) {
-			List<ReviewListDto> reviews = reviewService.getAll();
-		model.addAttribute("reviews", reviews);
-		return "content/review/reviewList1";
-	} 
+//	@GetMapping("/reviewList1")
+//	public String reviewList1(Model model) {
+//		List<ReviewListDto> reviews = reviewService.getAll();
+//		model.addAttribute("reviews", reviews);
+//		return "content/review/reviewList1";
+//	} 
 	
 	@ResponseBody
 	@GetMapping("/test")
-	public List<Review> retrieveAll(){
-		return null;
+	public List<ReviewListDto> retrieveAll(){
+//		return reviewService.getAll();
+//		Optional<Review> review =reviewRepository.findById(1L); 
+//		List<Review> list = review.get
+		return reviewService.getAllPk(1L);
+		
 	}
 }

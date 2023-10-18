@@ -9,6 +9,8 @@
 <body>
 	<div id="container-main" class="mt-5">
 		<h1 th:text="${review.rv_title}"></h1>
+		<h2 th:text="${review.movie.movie_name}"></h2>
+		<h2 th:text="${review.member.id}"></h2>
 		<div id="content-box">
 			<div>글번호 : <span th:text="${review.review_pk}"></span></div>
 			<div>등록 일시 : <span th:text="${review.rv_date}"></span></div>

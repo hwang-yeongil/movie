@@ -7,6 +7,8 @@ import org.springframework.format.annotation.DateTimeFormat;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
+import zeroone.movie.member.domain.Member;
+import zeroone.movie.movie.domain.Movie;
 
 @Getter
 @Setter
@@ -18,5 +20,6 @@ public class DetailDto {
 	@DateTimeFormat(pattern = "yyyy-MM-dd`T`HH:mm:ss")
 	private LocalDateTime rv_date;
 	private int rv_star;
-//	private String member_id;
+	private Member member;
+	private Movie movie;
 }

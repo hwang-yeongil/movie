@@ -7,6 +7,7 @@ import java.util.Optional;
 
 import javax.persistence.EntityManager;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
@@ -29,9 +30,11 @@ import zeroone.movie.review.repository.ReviewRepository;
 public class ReviewServiceImpl implements ReviewService{
 	
 	private final MemberRepository memberRepository;
-	private final ReviewRepository reviewRepository;
+//	private final ReviewRepository reviewRepository;
 	private final MovieRepository movieRepository;
 	private final EntityManager em;
+	@Autowired
+	ReviewRepository reviewRepository;
 	
 	@Override
 	public ResponseEntity save(AddReviewFormDto formDto) {
@@ -68,19 +71,50 @@ public class ReviewServiceImpl implements ReviewService{
 		
 		for(Review review : reviews) {
 			Member member = review.getMember();
+			Movie movie = review.getMovie();
 			
 			ReviewListDto dto = ReviewListDto.builder()
 					.review_pk(review.getReview_pk())
 					.rv_title(review.getRv_title())
 					.rv_date(review.getRv_date())
 					.rv_star(review.getRv_star())
-					.member_id(member.getId())
+					.member(member)
+					.movie(movie)
 					.build();
 			
 			list.add(dto);
 		}
 		return list;
 	}
+	
+	
+	@Override
+	public List<ReviewListDto> getAllPk(Long id) {
+		// TODO Auto-generated method stub
+		List<Review> reviews = reviewRepository.findAll();
+		List<ReviewListDto> list = new ArrayList<>();
+		
+		for(Review review : reviews) {
+			if(review.getMovie().getMovie_pk().equals(id)) {
+				
+				Member member = review.getMember();
+				Movie movie = review.getMovie();
+				
+				ReviewListDto dto = ReviewListDto.builder()
+						.review_pk(review.getReview_pk())
+						.rv_title(review.getRv_title())
+						.rv_date(review.getRv_date())
+						.rv_star(review.getRv_star())
+						.member(member)
+						.movie(movie)
+						.build();
+				
+				list.add(dto);
+			}
+		}
+		return list;
+	}
+	
 	
 	@Override
 	public DetailDto getDetail(Long id) {
@@ -89,14 +123,16 @@ public class ReviewServiceImpl implements ReviewService{
 		Review reviewEntity = review.orElse(null);
 		
 		Member member = reviewEntity.getMember();
-		
+		Movie movie = reviewEntity.getMovie();
+
 		DetailDto dto = DetailDto.builder()
 				.review_pk(reviewEntity.getReview_pk())
 				.rv_title(reviewEntity.getRv_title())
 				.rv_content(reviewEntity.getRv_content())
 				.rv_date(reviewEntity.getRv_date())
 				.rv_star(reviewEntity.getRv_star())
-//				.member_id(member.getId())
+				.member(member)
+				.movie(movie)
 				.build();
 		
 		return dto;

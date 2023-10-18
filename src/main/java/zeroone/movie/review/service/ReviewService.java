@@ -12,5 +12,7 @@ import zeroone.movie.review.dto.ReviewListDto;
 public interface ReviewService {
 	ResponseEntity save(AddReviewFormDto formDto);
 	List<ReviewListDto> getAll();
+	List<ReviewListDto> getAllPk(Long id);
 	DetailDto getDetail(Long id);
+//	List<Review> findByMoviePk(Long movie_pk);
 }

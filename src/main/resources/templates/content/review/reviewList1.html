@@ -9,9 +9,7 @@
 <body>
 	<div id="container-main" class="mt-5">
 
-		<button type="button" class="btn btn-primary"
-			th:onclick="|location.href='@{/addReview(id=${param.id})}'|">
-			리뷰 작성</button>
+		
 		<table class="table">
 			<thead>
 				<tr>
@@ -22,12 +20,13 @@
 
 			<tbody>
 
-				<tr th:each="review : ${reviews}">
-					<td th:text="${review.member_id}"></td>
+				<tr th:each="review : ${reviews}"
+				th:onclick="'location.href=\''+ @{/{id}(id=${review.review_pk})} + '\''">
+					<td th:text="${review.movie.movie_name}"></td>
+					<td th:text="${review.member.id}"></td>
 					<td th:text="${review.rv_title}"></td>
 					<td th:text="${review.rv_star}"></td>
 					<td th:text="${review.rv_date}"></td>
-					
 				</tr>
 			</tbody>
 		</table>
