@@ -132,12 +132,17 @@ public class ReviewServiceImpl implements ReviewService{
 				.rv_content(reviewEntity.getRv_content())
 				.rv_date(reviewEntity.getRv_date())
 				.rv_star(reviewEntity.getRv_star())
-				.member(member)
+				.member_id(member.getId())
 				.movie(movie)
 				.build();
 		
 		return dto;
 	}
 	
-	
+	@Override
+	public ResponseEntity remove(Long id) {
+		// TODO Auto-generated method stub
+		reviewRepository.deleteById(id);
+		return new ResponseEntity("success", HttpStatus.OK);
+	}
 }

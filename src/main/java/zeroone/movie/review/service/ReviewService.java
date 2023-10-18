@@ -14,5 +14,6 @@ public interface ReviewService {
 	List<ReviewListDto> getAll();
 	List<ReviewListDto> getAllPk(Long id);
 	DetailDto getDetail(Long id);
+	ResponseEntity remove(Long id);
 //	List<Review> findByMoviePk(Long movie_pk);
 }

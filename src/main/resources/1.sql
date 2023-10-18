@@ -12,7 +12,7 @@ CREATE TABLE MEMBER(
 	role varchar2(50) NOT NULL,
 	secession char(4) NOT NULL
 );
-SELECT * FROM MEMBER;
+SELECT * FROM movie;
 
 CREATE TABLE movie(
 	movie_pk NUMBER NOT NULL PRIMARY key,

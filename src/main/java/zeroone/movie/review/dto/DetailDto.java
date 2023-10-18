@@ -20,6 +20,6 @@ public class DetailDto {
 	@DateTimeFormat(pattern = "yyyy-MM-dd`T`HH:mm:ss")
 	private LocalDateTime rv_date;
 	private int rv_star;
-	private Member member;
+	private String member_id;
 	private Movie movie;
 }

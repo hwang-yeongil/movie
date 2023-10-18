@@ -10,7 +10,7 @@
 	<div id="container-main" class="mt-5">
 		<h1 th:text="${review.rv_title}"></h1>
 		<h2 th:text="${review.movie.movie_name}"></h2>
-		<h2 th:text="${review.member.id}"></h2>
+		<h2 th:text="${review.member_id}"></h2>
 		<div id="content-box">
 			<div>글번호 : <span th:text="${review.review_pk}"></span></div>
 			<div>등록 일시 : <span th:text="${review.rv_date}"></span></div>
@@ -25,6 +25,41 @@
 		</div>
 
 	</div>
+    <script th:inline="javascript">
+
+        $(document).ready(function () {
+            /*<![CDATA[*/
+
+            var review_pk = /*[[${review.review_pk}]]*/'';
+            var member_id = /*[[${review.member_id}]]*/'';
+
+
+            $('#remove').click((event) => {
+                if (localStorage.getItem('id') != member_id) {
+                    alert('권한이 없습니다');
+                } else {
+                    const path = 'http://localhost:8881/api/reviewList/' + review_pk;
+
+                    $.ajax({
+                        url: path,
+                        type: 'DELETE',
+                        contentType: 'application/json',
+                    }).done((result) => {
+                        console.log(result);
+                        console.log('1231231231231')
+                        location.href = "http://localhost:8881"
+                        if (response == 'success') {
+                            alert('삭제 성공')
+                        } else {
+                            alert(result);
+                        }
+                    });
+                }
+            })
+        /*]]*/
+        });
+
+    </script>
 </body>
 
 </html>

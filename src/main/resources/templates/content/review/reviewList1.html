@@ -8,8 +8,6 @@
 </head>
 <body>
 	<div id="container-main" class="mt-5">
-
-		
 		<table class="table">
 			<thead>
 				<tr>
@@ -17,9 +15,7 @@
 					<th>이름</th>
 				</tr>
 			</thead>
-
 			<tbody>
-
 				<tr th:each="review : ${reviews}"
 				th:onclick="'location.href=\''+ @{/{id}(id=${review.review_pk})} + '\''">
 					<td th:text="${review.movie.movie_name}"></td>
