@@ -36,6 +36,7 @@ public class ReviewServiceImpl implements ReviewService{
 	@Autowired
 	ReviewRepository reviewRepository;
 	
+// 리뷰 저장	
 	@Override
 	public ResponseEntity save(AddReviewFormDto formDto) {
 		// TODO Auto-generated method stub
@@ -62,7 +63,7 @@ public class ReviewServiceImpl implements ReviewService{
 			return new ResponseEntity("fail", HttpStatus.BAD_REQUEST);
 		}
 	}
-	
+// 리뷰 전체 ( 관리자 용
 	@Override
 	public List<ReviewListDto> getAll() {
 		// TODO Auto-generated method stub
@@ -87,7 +88,7 @@ public class ReviewServiceImpl implements ReviewService{
 		return list;
 	}
 	
-	
+//	리뷰 페이지 ( 영화별 구분
 	@Override
 	public List<ReviewListDto> getAllPk(Long id) {
 		// TODO Auto-generated method stub
@@ -115,7 +116,7 @@ public class ReviewServiceImpl implements ReviewService{
 		return list;
 	}
 	
-	
+//	리뷰 
 	@Override
 	public DetailDto getDetail(Long id) {
 		// TODO Auto-generated method stub
