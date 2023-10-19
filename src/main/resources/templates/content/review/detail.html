@@ -56,6 +56,16 @@
                     });
                 }
             })
+            
+            $('#update').click((event) => {
+            	if(localStorage.getItem('id') != member_id) {
+            		alert('권한이 없습니다');
+            	} else{
+            		location.href = "http://localhost:8881/update/" + review_pk;
+            	}
+            	
+            })
+            
         /*]]*/
         });
 

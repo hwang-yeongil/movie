@@ -22,6 +22,7 @@ import zeroone.movie.review.domain.Review;
 import zeroone.movie.review.dto.AddReviewFormDto;
 import zeroone.movie.review.dto.DetailDto;
 import zeroone.movie.review.dto.ReviewListDto;
+import zeroone.movie.review.dto.UpdateDto;
 import zeroone.movie.review.repository.ReviewRepository;
 
 @Service
@@ -145,4 +146,20 @@ public class ReviewServiceImpl implements ReviewService{
 		reviewRepository.deleteById(id);
 		return new ResponseEntity("success", HttpStatus.OK);
 	}
+	
+	@Override
+	public UpdateDto update(Long review_pk) {
+		// TODO Auto-generated method stub
+		Optional<Review> review = reviewRepository.findById(review_pk);
+		Review reviewEntity = review.orElseGet(null);
+		
+		UpdateDto dto = UpdateDto.builder()
+				.review_pk(reviewEntity.getReview_pk())
+				.rv_title(reviewEntity.getRv_title())
+				.rv_content(reviewEntity.getRv_content())
+				.build();
+		
+		return dto;
+	}
+	
 }
