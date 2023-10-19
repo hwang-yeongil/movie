@@ -20,3 +20,4 @@ public interface ReviewService {
 //	List<Review> findByMoviePk(Long movie_pk);
 	UpdateDto update(Long review_pk);
 }
+ 
