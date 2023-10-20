@@ -146,19 +146,37 @@ public class ReviewServiceImpl implements ReviewService{
 		reviewRepository.deleteById(id);
 		return new ResponseEntity("success", HttpStatus.OK);
 	}
+//	
+//	public ResponseEntity update(Long id, UpdateDto updateDto) {
+//		// TODO Auto-generated method stub
+//
+//		Review reviewEntity = reviewRepository.findById(id).get();
+//
+//		reviewEntity.setRv_title(updateDto.getRv_title());
+//		reviewEntity.setRv_star(updateDto.getRv_star());
+//		reviewEntity.setRv_content(updateDto.getRv_content());
+//		
+//		reviewRepository.save(reviewEntity);
+//		return new ResponseEntity("success", HttpStatus.OK);
+//	}
 	
 	@Override
-	public ResponseEntity update(Long id, UpdateDto updateDto) {
-		// TODO Auto-generated method stub
+	public ResponseEntity<?> update(Long id, UpdateDto updateDto) {
+	    // 엔티티를 안전하게 찾음
+	    Optional<Review> optionalReview = reviewRepository.findById(id);
+	    
+	    if (optionalReview.isPresent()) {
+	        Review reviewEntity = optionalReview.get();
+	        reviewEntity.setRv_title(updateDto.getRv_title());
+	        reviewEntity.setRv_star(updateDto.getRv_star());
+	        reviewEntity.setRv_content(updateDto.getRv_content());
 
-		Review reviewEntity = reviewRepository.findById(id).get();
-
-		reviewEntity.setRv_title(updateDto.getRv_title());
-		reviewEntity.setRv_star(updateDto.getRv_star());
-		reviewEntity.setRv_content(updateDto.getRv_content());
-		
-		reviewRepository.save(reviewEntity);
-		return new ResponseEntity("success", HttpStatus.OK);
+	        reviewRepository.save(reviewEntity);
+	        return new ResponseEntity<>("success", HttpStatus.OK);
+	    } else {
+	        // 엔티티를 찾지 못한 경우 예외 처리 또는 다른 응답 방식 선택
+	        return new ResponseEntity<>("Review not found", HttpStatus.NOT_FOUND);
+	    }
 	}
 	
 }
