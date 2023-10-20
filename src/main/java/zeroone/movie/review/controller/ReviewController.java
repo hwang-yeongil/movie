@@ -63,7 +63,12 @@ public class ReviewController {
 		return "content/review/detail";
 	}
 	
-
+	@GetMapping("update/{id}")
+	public String update(@PathVariable Long id, Model model) {
+		DetailDto review = reviewService.getDetail(id);
+		model.addAttribute("review", review);
+		return "content/review/update";
+	}
 	
 //	test
 //	@GetMapping("/reviewList1")

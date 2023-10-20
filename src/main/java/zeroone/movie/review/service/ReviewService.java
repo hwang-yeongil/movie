@@ -18,6 +18,6 @@ public interface ReviewService {
 	ResponseEntity remove(Long id);
 //	void update(Long review_pk, String rv_title, String rv_content);
 //	List<Review> findByMoviePk(Long movie_pk);
-	UpdateDto update(Long review_pk);
+	ResponseEntity update(Long id, UpdateDto updateDto);
 }
  

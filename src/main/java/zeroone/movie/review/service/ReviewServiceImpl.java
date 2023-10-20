@@ -35,7 +35,7 @@ public class ReviewServiceImpl implements ReviewService{
 	private final MovieRepository movieRepository;
 	private final EntityManager em;
 	@Autowired
-	ReviewRepository reviewRepository;
+	private ReviewRepository reviewRepository;
 	
 // 리뷰 저장	
 	@Override
@@ -148,18 +148,17 @@ public class ReviewServiceImpl implements ReviewService{
 	}
 	
 	@Override
-	public UpdateDto update(Long review_pk) {
+	public ResponseEntity update(Long id, UpdateDto updateDto) {
 		// TODO Auto-generated method stub
-		Optional<Review> review = reviewRepository.findById(review_pk);
-		Review reviewEntity = review.orElseGet(null);
+
+		Review reviewEntity = reviewRepository.findById(id).get();
+
+		reviewEntity.setRv_title(updateDto.getRv_title());
+		reviewEntity.setRv_star(updateDto.getRv_star());
+		reviewEntity.setRv_content(updateDto.getRv_content());
 		
-		UpdateDto dto = UpdateDto.builder()
-				.review_pk(reviewEntity.getReview_pk())
-				.rv_title(reviewEntity.getRv_title())
-				.rv_content(reviewEntity.getRv_content())
-				.build();
-		
-		return dto;
+		reviewRepository.save(reviewEntity);
+		return new ResponseEntity("success", HttpStatus.OK);
 	}
 	
 }

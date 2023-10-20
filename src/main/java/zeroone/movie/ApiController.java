@@ -6,6 +6,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -19,6 +20,7 @@ import zeroone.movie.member.service.MemberService;
 import zeroone.movie.movie.domain.Movie;
 import zeroone.movie.movie.repository.MovieRepository;
 import zeroone.movie.review.dto.AddReviewFormDto;
+import zeroone.movie.review.dto.UpdateDto;
 import zeroone.movie.review.service.ReviewService;
 
 @RestController
@@ -54,4 +56,10 @@ public class ApiController {
 		return responseEntity;
 	}
 //	삭제가 되긴한데 뭔가 문제가 있음 확인 요망
+	
+	@PatchMapping("/rvUpdate/{id}")
+	public ResponseEntity update(@PathVariable Long id,@RequestBody UpdateDto updateDto) {
+		ResponseEntity responseEntity = reviewService.update(id, updateDto);
+		return responseEntity;
+	}
 }

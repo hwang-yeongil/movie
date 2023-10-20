@@ -1,6 +1,8 @@
 <!DOCTYPE html>
-<html lang="ko" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-	layout:decorate="~{common/layout/defaultLayout}" layout:fragment="Content">
+<html lang="ko" xmlns:th="http://www.thymeleaf.org" 
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="~{common/layout/defaultLayout}" 
+	layout:fragment="Content">
 
 <head>
 	<title>회원관리</title>
@@ -32,7 +34,14 @@
 
             var review_pk = /*[[${review.review_pk}]]*/'';
             var member_id = /*[[${review.member_id}]]*/'';
-
+			
+            $('#update').click((event) => {
+                if (localStorage.getItem('id') != member_id) {
+                    alert('권한이 없습니다');
+                } else {
+                    location.href = "http://localhost:8881/update/" + review_pk;
+                }
+            })
 
             $('#remove').click((event) => {
                 if (localStorage.getItem('id') != member_id) {
@@ -49,7 +58,7 @@
                         console.log('1231231231231')
                         location.href = "http://localhost:8881"
                         if (response == 'success') {
-                            alert('삭제 성공')
+                            alert('삭제 성공');
                         } else {
                             alert(result);
                         }
