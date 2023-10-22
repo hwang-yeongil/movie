@@ -1,10 +1,10 @@
-CREATE TABLE MEMBER(
-	id NUMBER NOT NULL PRIMARY key,
-	username varchar2(50) NOT NULL,
-	userpw varchar2(100) NOT NULL,
-	role varchar2(50) NOT NULL,
-	secession char(4) NOT NULL
-);
+--CREATE TABLE MEMBER(
+--	id NUMBER NOT NULL PRIMARY key,
+--	username varchar2(50) NOT NULL,
+--	userpw varchar2(100) NOT NULL,
+--	role varchar2(50) NOT NULL,
+--	secession char(4) NOT NULL
+--);
 
 CREATE TABLE MEMBER(
 	id varchar2(50) NOT NULL PRIMARY key,
@@ -12,13 +12,11 @@ CREATE TABLE MEMBER(
 	role varchar2(50) NOT NULL,
 	secession char(4) NOT NULL
 );
-SELECT * FROM movie;
 
 CREATE TABLE movie(
 	movie_pk NUMBER NOT NULL PRIMARY key,
 	movie_name varchar2(50) NOT NULL
 );
-
 
 CREATE TABLE theater(
 	theater_pk NUMBER NOT NULL PRIMARY KEY
@@ -31,8 +29,6 @@ CREATE TABLE seat(
 	CONSTRAINT seat_theater_fk foreign key(theater_pk) references theater (theater_pk)
 );
 
-
-
 CREATE TABLE screen(
 	scr_pk NUMBER NOT NULL PRIMARY key,
 	theater_pk NUMBER NOT NULL,
@@ -41,11 +37,6 @@ CREATE TABLE screen(
 	CONSTRAINT scr_theater_fk foreign key(theater_pk) references theater (theater_pk),
 	CONSTRAINT scr_movie_fk foreign key(movie_pk) references movie (movie_pk)
 );
-
-INSERT INTO SCREEN VALUES (1,1,1,TO_DATE('23/12/01 07:00', 'YY/MM/DD HH24:MI'));
-INSERT INTO SCREEN VALUES (2,1,2,TO_DATE('23/12/01 10:00', 'YY/MM/DD HH24:MI'));
-INSERT INTO SCREEN VALUES (3,2,TO_DATE('23/12/03 08:00', 'YY/MM/DD HH24:MI'));
-INSERT INTO SCREEN VALUES (4,2,TO_DATE('23/12/03 12:00', 'YY/MM/DD HH24:MI'));
 
 CREATE TABLE review(
 	review_pk NUMBER NOT NULL PRIMARY key,
@@ -61,12 +52,12 @@ CREATE TABLE review(
 
 CREATE TABLE reservation(
 	reservation_pk NUMBER NOT NULL PRIMARY key,
-	userid varchar2(50) NOT NULL,
+	member_id varchar2(50) NOT NULL,
 	scr_pk NUMBER NOT NULL,
 	seat_pk NUMBER NOT NULL,
 	reserv_date date NOT NULL,
 	CONSTRAINT res_seat_fk foreign key(seat_pk) references seat (seat_pk),
-	CONSTRAINT res_userid_fk foreign key(userid) references member (id),
+	CONSTRAINT res_member_id_fk foreign key(member_id) references member (id),
 	CONSTRAINT res_scr_fk foreign key(scr_pk) references screen (scr_pk)
 );
 
@@ -129,8 +120,16 @@ INSERT INTO SEAT values(38, 2, 'B8');
 INSERT INTO SEAT values(39, 2, 'B9');
 INSERT INTO SEAT values(40, 2, 'B10');
 
-INSERT INTO RESERVATION values(1,2,1,10,to_date(sysdate,'YY/MM/DD HH24:MI'));
-INSERT INTO RESERVATION values(2,2,1,9,to_date(sysdate,'YY/MM/DD HH24:MI'));
+
+INSERT INTO SCREEN VALUES (1,1,1,TO_DATE('23/12/01 07:00', 'YY/MM/DD HH24:MI'));
+INSERT INTO SCREEN VALUES (2,1,2,TO_DATE('23/12/01 10:00', 'YY/MM/DD HH24:MI'));
+INSERT INTO SCREEN VALUES (3,2,TO_DATE('23/12/03 08:00', 'YY/MM/DD HH24:MI'));
+INSERT INTO SCREEN VALUES (4,2,TO_DATE('23/12/03 12:00', 'YY/MM/DD HH24:MI'));
+
+INSERT INTO RESERVATION values(1,'tester1',1,10,to_date(sysdate,'YY/MM/DD HH24:MI'));
+INSERT INTO RESERVATION values(2,'tester1',1,9,to_date(sysdate,'YY/MM/DD HH24:MI'));
+
+commit;
 
 DROP TABLE reservation;
 DROP TABLE review;
@@ -181,7 +180,7 @@ AND s.THEATER_PK = t.THEATER_PK
 AND s.THEATER_PK =s2.THEATER_PK 
 AND r.SEAT_PK = s2.SEAT_PK 
 ;
-
+7              11
 SELECT * FROM RESERVATION;
 
 -- 예매 정보

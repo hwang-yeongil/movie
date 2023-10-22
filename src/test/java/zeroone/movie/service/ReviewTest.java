@@ -1,29 +1,26 @@
 package zeroone.movie.service;
 
-import static org.assertj.core.api.Assertions.assertThat;
-
 import java.time.LocalDateTime;
-import java.util.List;
-import java.util.Optional;
+
+import javax.transaction.Transactional;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.transaction.annotation.Transactional;
 
 import zeroone.movie.review.domain.Review;
 import zeroone.movie.review.repository.ReviewRepository;
 import zeroone.movie.review.service.ReviewService;
 
 @SpringBootTest
-//@Transactional
+@Transactional
 public class ReviewTest {
 
 	private ReviewService reviewService;
 	@Autowired
 	ReviewRepository reviewRepository;
 
-//	@Test
+	@Test
 	public void saveTest() throws Exception{
 //		reviewService.update(1L,"testtestste", "123123123");
 		Review review = reviewRepository.findById(1L).get();
@@ -43,7 +40,7 @@ public class ReviewTest {
 			System.out.println("review : " +  reviewRepository.findById(1L));
 	}
 
-	@Test
+//	@Test
 	public void saveTest1() throws Exception {
 //		reviewService.update(1L,"testtestste", "123123123");
 		Review review = reviewRepository.findById(1L).get();

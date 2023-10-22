@@ -24,6 +24,7 @@ dependencies {
 	implementation 'nz.net.ultraq.thymeleaf:thymeleaf-layout-dialect'
 	implementation 'org.springframework.boot:spring-boot-starter-data-jpa'// jpa에 jdbc를 포함하여 jdbc 삭제
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
+	testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
 	
 	runtimeOnly 'com.oracle.database.jdbc:ojdbc8'
 }

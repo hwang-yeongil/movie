@@ -69,21 +69,10 @@ public class ReviewController {
 		model.addAttribute("review", review);
 		return "content/review/update";
 	}
-	
-//	test
-//	@GetMapping("/reviewList1")
-//	public String reviewList1(Model model) {
-//		List<ReviewListDto> reviews = reviewService.getAll();
-//		model.addAttribute("reviews", reviews);
-//		return "content/review/reviewList1";
-//	} 
-	
+
 	@ResponseBody
 	@GetMapping("/test")
 	public List<ReviewListDto> retrieveAll(){
-//		return reviewService.getAll();
-//		Optional<Review> review =reviewRepository.findById(1L); 
-//		List<Review> list = review.get
 		return reviewService.getAllPk(1L);
 		
 	}
