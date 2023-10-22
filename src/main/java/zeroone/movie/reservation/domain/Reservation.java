@@ -16,13 +16,11 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import lombok.Setter;
 import zeroone.movie.member.domain.Member;
 import zeroone.movie.movie.domain.Screen;
 import zeroone.movie.movie.domain.Seat;
 
 @Getter
-@Setter
 @Entity
 @Builder
 @AllArgsConstructor

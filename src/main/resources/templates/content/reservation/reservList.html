@@ -12,13 +12,13 @@
 	<div class="container-fluid mt-3" id="container-main">
 		
 		<div class="row">
-			<div th:each="movie : ${movies}" class="col- bg-success bg-primary text-white" style="border: 1px solid black">
-				<p th:text="${movie.movie_name}"></p>
-				<p th:text="${movie.movie_pk}"></p>
-				<button type="button" class="btn btn-primary">예매하기</button>
-				<button type="button" class="btn btn-primary"
-				th:onclick="|location.href='@{/reviewList/{link}(link=${movie.movie_pk})}'|">
-				리뷰</button>
+			<div th:each="reserv : ${reservs}" class="col- bg-success bg-primary text-white" style="border: 1px solid black">
+				<p th:text="${reserv.reservation_pk}"></p>
+				<p th:text="${reserv.reserv_date}"></p>
+				<p th:text="${reserv.screen.scr_pk}"></p>
+				<p th:text="${reserv.seat.seat_name}"></p>
+				<p th:text="${reserv.member.id}"></p>
+				
 			</div>
 		</div>
 	</div>

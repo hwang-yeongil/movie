@@ -16,12 +16,17 @@ import zeroone.movie.reservation.repository.ReservRepository;
 public class ReservController {
 	
 	@Autowired
-	private ReservRepository reservRepository;
+	ReservRepository reservRepository;
 	
 	@GetMapping("/reservList")
 	public String reservList(Model model) {
 		List<Reservation> list = reservRepository.findAll();
-		model.addAttribute("Reserv", list);
-		return "content/reservList";
+		model.addAttribute("reservs", list);
+		return "content/reservation/reservList";
+	}
+	
+	@GetMapping("addReserv")
+	public String addReserv(Long id, Long scr_pk, Long seat_pk, Model model) {
+		return "content/reservation/addReserv";
 	}
 }

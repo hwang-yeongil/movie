@@ -1,16 +1,29 @@
 package zeroone.movie.reservation.service;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import lombok.RequiredArgsConstructor;
+import zeroone.movie.member.domain.Member;
+import zeroone.movie.member.repository.MemberRepository;
+import zeroone.movie.movie.domain.Movie;
+import zeroone.movie.movie.domain.Screen;
+import zeroone.movie.movie.domain.Seat;
+import zeroone.movie.movie.repository.MovieRepository;
+import zeroone.movie.movie.repository.ScreenRepository;
+import zeroone.movie.movie.repository.SeatRepository;
 import zeroone.movie.reservation.domain.Reservation;
-import zeroone.movie.reservation.dto.ReservListDto;
+import zeroone.movie.reservation.dto.AddReserv;
 import zeroone.movie.reservation.repository.ReservRepository;
+import zeroone.movie.review.domain.Review;
 
 @Service
 @Transactional
@@ -20,25 +33,36 @@ public class ReservServiceImpl implements ReservService{
 	@Autowired
 	ReservRepository reservRepository;
 	
+	private final MemberRepository memberRepository;
+	private final ScreenRepository screenRepository;
+	private final SeatRepository seatRepository;
+//	private final MovieRepository movieRepository;
 	
 	@Override
-		public List<ReservListDto> reservGetList() {
-			// TODO Auto-generated method stub
-			List<Reservation> reservLists = reservRepository.findAll();
-			List<ReservListDto> list = new ArrayList<>();
+	public ResponseEntity save(AddReserv formDto) {
+		// TODO Auto-generated method stub
+		Optional<Member> member = memberRepository.findById(formDto.getMember_id());
+		Optional<Screen> screen = screenRepository.findById(formDto.getScr_pk());
+		Optional<Seat> seat = seatRepository.findById(formDto.getSeat_pk());
+		
+		if(member.isPresent()) {
+			Member memberEntity = member.get();
+			Screen screenEntity = screen.get();
+			Seat seatEntity = seat.get();
 			
-			for(Reservation reserv : reservLists ) {
-				
-				ReservListDto dto = ReservListDto.builder()
-						.reservation_pk(reserv.getReservation_pk())
-						.reserv_date(reserv.getReserv_date())
-						.scr_pk(reserv.getScreen().getScr_pk())
-						.seat_pk(reserv.getSeat().getSeat_pk())
-						.member_id(reserv.getMember().getId())
-						.build();
-				
-				list.add(dto);
-			}
-			return list;
+			Reservation reserv = Reservation.builder()
+				.reservation_pk(formDto.getReservation_pk())
+				.reserv_date(LocalDateTime.now())
+				.seat(seatEntity)
+				.member(memberEntity)
+				.screen(screenEntity)
+				.build();
+			
+			reservRepository.save(reserv);
+			 
+			return new ResponseEntity("success", HttpStatus.OK);
+		}else {
+			return new ResponseEntity("fail", HttpStatus.BAD_REQUEST);
 		}
+	}
 }

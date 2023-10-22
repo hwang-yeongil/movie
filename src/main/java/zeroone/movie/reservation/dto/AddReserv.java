@@ -11,7 +11,7 @@ import lombok.Setter;
 @Getter
 @Setter
 @Builder
-public class ReservListDto {
+public class AddReserv {
 	private Long reservation_pk;
 	@DateTimeFormat(pattern = "yyyy-MM-dd`T`HH:mm:ss")
 	private LocalDateTime reserv_date;

@@ -2,8 +2,10 @@ package zeroone.movie.reservation.service;
 
 import java.util.List;
 
-import zeroone.movie.reservation.dto.ReservListDto;
+import org.springframework.http.ResponseEntity;
+
+import zeroone.movie.reservation.dto.AddReserv;
 
 public interface ReservService {
-	List<ReservListDto> reservGetList();
+	ResponseEntity save(AddReserv addReserv);
 }

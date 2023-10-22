@@ -31,8 +31,8 @@ import zeroone.movie.review.repository.ReviewRepository;
 public class ReviewServiceImpl implements ReviewService{
 	
 	private final MemberRepository memberRepository;
-//	private final ReviewRepository reviewRepository;
 	private final MovieRepository movieRepository;
+//	private final ReviewRepository reviewRepository;
 	private final EntityManager em;
 	@Autowired
 	private ReviewRepository reviewRepository;
