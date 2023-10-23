@@ -48,6 +48,7 @@
 	<script th:inline="javascript">
     	$(document).ready(function(){
     			 
+    		 /*<![CDATA[*/
     		 var review_pk = "[[${review.review_pk}]]";
     		
     		$('#update').click((event) => {
@@ -89,10 +90,9 @@
                 	
                  });
     		});
-    	});
-    		 /*<![CDATA[*/
-    	
     		 /*]]*/
+    	});
+    	
     </script>
     </th:block>
 </body>
