@@ -33,7 +33,7 @@ public class ScreenServiceImpl implements ScreenService{
 		
 		for(Screen screen : screens) {
 			if(now.isBefore(screen.getScr_date())) {
-				
+//				dto 만들어보기
 				Movie movie = Movie.builder()
 						.movie_pk(screen.getMovie().getMovie_pk())
 						.movie_name(screen.getMovie().getMovie_name())
