@@ -18,17 +18,21 @@
 		</div>
 		<div id="theaterTable" th:fragment="selectScr">
 		    <form method="post">
-		        <select name="theater" id="theaterSelect">
-		            <option th:each="theater : ${theaters}" th:value="${theater.theater_pk}" th:text="${theater.theater_pk + '관'}">Movie Title</option>
-		        </select>
+		        <div name="theater" id="theaterSelect"></div>
+		    </form>
+		</div>
+		<div id="dateTable" th:fragment="selectScr">
+		    <form method="post">
+		        <div name="date" id="dateSelect"></div>
 		    </form>
 		</div>
 		<div id="movieInfo"></div>
+		<div id="theaterInfo"></div>
 	</div>
 <script type="text/javascript">
-	$('input[name="movie"]').on('change', function() {
-	    var movieId = $('input[name="movie"]:checked').val();
-	    if (movieId)  {
+    $('input[name="movie"]').on('change', function() {
+        var movieId = $('input[name="movie"]:checked').val();
+        if (movieId) {
             $.post('/selectScr/' + movieId, function(data) {
                 $('#movieInfo').html('<h2>' + movieId + '</h2>');
 
@@ -36,19 +40,42 @@
                 var theaterTable = $('#theaterTable');
                 theaterTable.empty();
 
+                // Iterate through the data and create radio buttons for theaters
                 $.each(data, function(index, item) {
                     var theaterRadio = '<input type="radio" name="theater" value="' + item.theater_pk + '" id="theater_' + item.theater_pk + '">';
-                    theaterRadio += '<label for="theater_' + item.theater_pk + '">' + item.theater_pk + '관</label>';
+                    theaterRadio += '<label for="theater_' + item.theater_pk + '">' + item.theater_pk + '관</label><br>';
                     theaterTable.append(theaterRadio);
                 });
+
+                // If there are no theaters for the selected movie, show a message
+                if (data.length === 0) {
+                    theaterTable.html("이 영화는 상영 가능한 영화관이 없습니다.");
+                }
             });
         } else {
             $('#movieInfo').empty();
-            // 영화를 선택하지 않았을 때, 영화관 리스트를 초기화합니다.
-            var theaterSelect = $('#theaterSelect');
-            theaterSelect.empty();
+            var theaterTable = $('#theaterTable');
+            theaterTable.empty();
         }
     });
+    $('input[name="theater"]').on('change', function() {
+		var theater_pk = $('input[name="theater]:checked').val();
+		if(theater_pk){
+			$.post('/selectScr/' + theater_pk, function(data) {
+                $('#theaterInfo').html('<h2>' + theater_pk + '</h2>');
+                
+                var dateTable = $('#dateTable');
+                dateTable.empty();
+                
+                // 날짜 출력 이거든 버튼으로 ( 누르면 바로 의자 선택으로 가도록 )
+                })
+		}	else {
+            $('#theaterInfo').empty();
+            var theaterTable = $('#theaterTable');
+            theaterTable.empty();
+        }
+	});
+    
 </script>
 </body>
 </html>

@@ -3,6 +3,7 @@ package zeroone.movie.movie.service;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.function.Function;
 import java.util.stream.Collectors;
 
 import javax.persistence.EntityManager;
@@ -46,11 +47,13 @@ public class ScreenServiceImpl implements ScreenService{
 				list.add(dto);
 			}
 		}
+		List<MovieDto> m_List = DeduplicationUtils.deduplication(list, MovieDto::getMovie_pk);		
 		
-		return list; 
+		return m_List; 
 	}
+
 	@Override
-	public List<TheaterDto> findByMovie(Long moive_pk) {
+	public List<TheaterDto> findByMovie(Long movie_pk) {
 		// TODO Auto-generated method stub
 		List<Screen> screens = screenRepository.findAll();
 		List<TheaterDto> list = new ArrayList<>();
@@ -59,17 +62,21 @@ public class ScreenServiceImpl implements ScreenService{
 		for(Screen screen : screens) {
 			System.out.println(now);
 			System.out.println(screen.getScr_date());
-			if(now.isBefore(screen.getScr_date())) {
+			if(now.isBefore(screen.getScr_date()) && screen.getMovie().getMovie_pk() == movie_pk) {
 //				dto 만들어보기
 				TheaterDto dto = TheaterDto.builder()
-						.theater_pk(moive_pk)
+						.theater_pk(screen.getTheater().getTheater_pk())
 						.build();
+				System.out.println();
 				list.add(dto);
 			}
 		}
 		
+		System.out.println(list.size());
+		List<TheaterDto> m_List = DeduplicationUtils.deduplication(list, TheaterDto::getTheater_pk);		
+		System.out.println(list.size());
 		
-		return list.stream().distinct().collect(Collectors.toList());
+		return m_List; 
 	}
 	@Override
 	public List<Screen> findByMovieTheater(Long moive_pk, Long theater_pk) {
@@ -77,3 +84,4 @@ public class ScreenServiceImpl implements ScreenService{
 		return null;
 	}
 }
+
