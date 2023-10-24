@@ -78,6 +78,7 @@ INSERT INTO MOVIE VALUES (2,'천박사 퇴마 연구소');
 --INSERT INTO MOVIE VALUES (6,'거미집');
 
 INSERT INTO theater VALUES(1);
+INSERT INTO theater VALUES(2);
 
 INSERT INTO SEAT values(1, 1, 'A1');
 INSERT INTO SEAT values(2, 1, 'A2');

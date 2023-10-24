@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="~{common/layout/defaultLayout}"
+	layout:fragment="Content">
+<head>
+<title>회원관리</title>
+</head>
+<body>
+	<div id="container-main" class="mt-5">
+		<div id="movieTable">
+		    <form method="post">
+		        <th:block th:each="movie : ${movies}">
+		            <input type="radio" name="movie" th:value="${movie.movie_pk}" th:id="'movie_' + ${movie.movie_pk}" />
+		            <label th:for="'movie_' + ${movie.movie_pk}" th:text="${movie.movie_name}">Movie Title</label><br>
+		        </th:block>
+		    </form>
+		</div>
+		<div id="theaterTable" th:fragment="selectScr">
+		    <form method="post">
+		        <select name="theater" id="theaterSelect">
+		            <option th:each="theater : ${theaters}" th:value="${theater.theater_pk}" th:text="${theater.theater_pk + '관'}">Movie Title</option>
+		        </select>
+		    </form>
+		</div>
+		<div id="movieInfo"></div>
+	</div>
+<script type="text/javascript">
+	$('input[name="movie"]').on('change', function() {
+	    var movieId = $('input[name="movie"]:checked').val();
+	    if (movieId)  {
+            $.post('/selectScr/' + movieId, function(data) {
+                $('#movieInfo').html('<h2>' + movieId + '</h2>');
+
+                console.log(data);
+                var theaterTable = $('#theaterTable');
+                theaterTable.empty();
+
+                $.each(data, function(index, item) {
+                    var theaterRadio = '<input type="radio" name="theater" value="' + item.theater_pk + '" id="theater_' + item.theater_pk + '">';
+                    theaterRadio += '<label for="theater_' + item.theater_pk + '">' + item.theater_pk + '관</label>';
+                    theaterTable.append(theaterRadio);
+                });
+            });
+        } else {
+            $('#movieInfo').empty();
+            // 영화를 선택하지 않았을 때, 영화관 리스트를 초기화합니다.
+            var theaterSelect = $('#theaterSelect');
+            theaterSelect.empty();
+        }
+    });
+</script>
+</body>
+</html>
