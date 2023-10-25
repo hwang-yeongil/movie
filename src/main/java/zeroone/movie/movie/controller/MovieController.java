@@ -13,6 +13,8 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.fasterxml.jackson.annotation.JsonCreator.Mode;
+
 import lombok.RequiredArgsConstructor;
 import zeroone.movie.movie.domain.Movie;
 import zeroone.movie.movie.domain.Screen;
@@ -75,5 +77,10 @@ public class MovieController {
 //		LocalDateTime scrDate = Instant.ofEpochSecond(scrDateUnixTimestamp).atZone(ZoneId.systemDefault()).toLocalDateTime();
 //		return screenService.findOneByAll(id, t_id, scrDate);
 //	}
-	
+	@GetMapping("/addReserv/{id}")
+	public String addReserv(@PathVariable Long id, Model model) {
+		Screen screen = screenRepository.findById(id).get();
+		model.addAttribute("screen", screen);
+		return "content/reservation/addReserv";
+	}
 }
