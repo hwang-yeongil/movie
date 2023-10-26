@@ -5,38 +5,40 @@
 	layout:decorate="~{common/layout/defaultLayout}"
 	layout:fragment="Content">
 <head>
-    <title th:text="등록"></title>
+<title th:text="등록"></title>
 </head>
 <body>
-<th:block layout:fragment="content">
-    <div>
-        <h2>새 글 작성</h2>
-        <div>
-        	<input type="hidden" name="movie_pk" id="movie_pk" th:value=${param.id}>
-        	
-        	<select name="rv_star" id="rv_star">
-				<option value="1">1</option>
-				<option value="2">2</option>
-				<option value="3">3</option>
-				<option value="4">4</option>
-				<option value="5">5</option>
-			</select>
-        	
-        	
-        	
-            <label for="title">제목</label>
-            <input title="글제목" type="text" name="rv_title" id="rv_title"/>
-        </div>
-        <div class="content-box">
-            <label>내용</label>
-            <textarea class="rv_content" name="rv_content"
-                      rows="10" cols="50"></textarea>
-        </div>
-        <button id="save" type="button">저장</button>
-    </div>
-</th:block>
-<th:block layout:fragment="script">
-    <script type="text/javascript">
+	<th:block layout:fragment="content">
+		<div class="container px-5">
+			<h2>새 글 작성</h2>
+			<div>
+				<input type="hidden" name="movie_pk" id="movie_pk"
+					th:value=${param.id}> <select name="rv_star" id="rv_star">
+					<option value="1">1</option>
+					<option value="2">2</option>
+					<option value="3">3</option>
+					<option value="4">4</option>
+					<option value="5">5</option>
+				</select>
+
+				<div class="form-floating mb-3">
+					<input class="form-control" id="rv_title" type="text"
+						name="rv_title"> <label for="title">글제목</label>
+				</div>
+				<div class="form-floating mb-3">
+					<textarea class="form-control rv_content" id="rv_content"
+						type="text" style="height: 10rem"></textarea>
+					<label for="message">Message</label>
+
+				</div>
+				<div class="d-grid">
+					<button class="btn btn-primary btn-lg" id="save"
+						type="button">저장</button>
+				</div>
+			</div>
+	</th:block>
+	<th:block layout:fragment="script">
+		<script type="text/javascript">
 
         $(function () {
             $('#save').click((event) => {
@@ -84,6 +86,6 @@
             });
         });
     </script>
-</th:block>
+	</th:block>
 </body>
 </html>

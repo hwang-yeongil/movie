@@ -71,16 +71,18 @@ public class MovieController {
 	public Long selectOne(@PathVariable Long id, @PathVariable Long t_id, @PathVariable String date) {
 		return screenService.findOneByAll(id, t_id, date);
 	}
-//	@PostMapping("/selectScr/{id}/{t_id}/{scrDateUnixTimestamp}")
-//	@ResponseBody
-//	public Long selectOne(@PathVariable Long id, @PathVariable Long t_id,  @PathVariable Long scrDateUnixTimestamp) {
-//		LocalDateTime scrDate = Instant.ofEpochSecond(scrDateUnixTimestamp).atZone(ZoneId.systemDefault()).toLocalDateTime();
-//		return screenService.findOneByAll(id, t_id, scrDate);
-//	}
+
 	@GetMapping("/addReserv/{id}")
 	public String addReserv(@PathVariable Long id, Model model) {
 		Screen screen = screenRepository.findById(id).get();
 		model.addAttribute("screen", screen);
 		return "content/reservation/addReserv";
 	}
+	
+	@PostMapping("/addReserv/{seat_name}/{theater_pk}/{scr_pk}")
+	@ResponseBody
+	public Long findSeat(@PathVariable String seat_name, @PathVariable Long theater_pk, @PathVariable Long scr_pk) {
+		return screenService.findSeat(seat_name, theater_pk, scr_pk);
+	}
+	
 }

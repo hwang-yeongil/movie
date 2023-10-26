@@ -4,6 +4,7 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 import java.util.function.Function;
 import java.util.stream.Collectors;
 
@@ -16,10 +17,13 @@ import org.springframework.transaction.annotation.Transactional;
 import lombok.RequiredArgsConstructor;
 import zeroone.movie.movie.domain.Movie;
 import zeroone.movie.movie.domain.Screen;
+import zeroone.movie.movie.domain.Seat;
 import zeroone.movie.movie.dto.DateDto;
 import zeroone.movie.movie.dto.MovieDto;
+import zeroone.movie.movie.dto.SeatDto;
 import zeroone.movie.movie.dto.TheaterDto;
 import zeroone.movie.movie.repository.ScreenRepository;
+import zeroone.movie.movie.repository.SeatRepository;
 
 @Service
 @Transactional
@@ -27,6 +31,8 @@ import zeroone.movie.movie.repository.ScreenRepository;
 public class ScreenServiceImpl implements ScreenService {
 
 	private final EntityManager em;
+	@Autowired
+	SeatRepository seatRepository;
 	@Autowired
 	ScreenRepository screenRepository;
 
@@ -116,5 +122,24 @@ public class ScreenServiceImpl implements ScreenService {
 			}
 		}
 		return scr;
+	}
+	
+	@Override
+	public Long findSeat(String seat_name, Long theater_pk, Long scr_pk) {
+		// TODO Auto-generated method stub
+		Optional<Screen> screen =  screenRepository.findById(scr_pk);
+		List<Seat> seats = seatRepository.findAll();
+		Long theater = screen.get().getTheater().getTheater_pk();
+		Long seat_pk = 0L;
+		System.out.println(theater);
+		System.out.println("------------------------");
+		for(Seat seat : seats) {
+			if(theater == theater_pk && theater_pk == seat.getTheater().getTheater_pk()
+					&& seat_name.equals(seat.getSeat_name())) {
+				System.out.println(seat.getSeat_pk() +" : " + seat.getSeat_name());
+				seat_pk = seat.getSeat_pk();
+			}
+		}
+		return seat_pk;
 	}
 }

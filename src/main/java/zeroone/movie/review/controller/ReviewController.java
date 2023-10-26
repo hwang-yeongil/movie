@@ -52,7 +52,8 @@ public class ReviewController {
 	public String reviewList1(@PathVariable Long id, Model model) {
 		List<ReviewListDto> reviews = reviewService.getAllPk(id);
 		model.addAttribute("reviews", reviews);
-		return "content/review/reviewList1";
+		model.addAttribute("id",id);
+		return "content/review/reviewList";
 
 	}
 	
@@ -67,6 +68,7 @@ public class ReviewController {
 	public String update(@PathVariable Long id, Model model) {
 		DetailDto review = reviewService.getDetail(id);
 		model.addAttribute("review", review);
+		
 		return "content/review/update";
 	}
 

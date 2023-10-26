@@ -19,6 +19,8 @@ import zeroone.movie.member.dto.MemberFormDto;
 import zeroone.movie.member.service.MemberService;
 import zeroone.movie.movie.domain.Movie;
 import zeroone.movie.movie.repository.MovieRepository;
+import zeroone.movie.reservation.dto.AddReserv;
+import zeroone.movie.reservation.service.ReservService;
 import zeroone.movie.review.dto.AddReviewFormDto;
 import zeroone.movie.review.dto.UpdateDto;
 import zeroone.movie.review.service.ReviewService;
@@ -31,6 +33,7 @@ public class ApiController {
 	private final MemberService memberService;
 	private final ReviewService reviewService;
 	private final MovieRepository movieRepository;
+	private final ReservService reservService;
 	
 
 	
@@ -60,6 +63,12 @@ public class ApiController {
 	@PatchMapping("/rvUpdate/{id}")
 	public ResponseEntity update(@PathVariable Long id,@RequestBody UpdateDto updateDto) {
 		ResponseEntity responseEntity = reviewService.update(id, updateDto);
+		return responseEntity;
+	}
+	
+	@PostMapping("/addReservation")
+	public ResponseEntity addReservation(@RequestBody AddReserv addReserv) {
+		ResponseEntity responseEntity = reservService.save(addReserv);
 		return responseEntity;
 	}
 }

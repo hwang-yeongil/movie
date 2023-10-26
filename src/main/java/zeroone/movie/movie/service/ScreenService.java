@@ -18,4 +18,6 @@ public interface ScreenService {
 	List<DateDto> findByMovieTheater(Long moive_pk, Long theater_pk);
 	
 	Long findOneByAll(Long movie_pk, Long theater_pk, String scr_date);
+	
+	Long findSeat(String seat_name, Long theater_pk, Long scr_pk);
 }

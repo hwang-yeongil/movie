@@ -8,30 +8,45 @@
 </head>
 <body>
 	<div id="container-main" class="mt-5">
+		<div class="container px-5 my-5">
+			<button type="button" class="btn btn-primary"
+				th:onclick="|location.href='@{/addReview(id=${id})}'|">리뷰
+				작성</button>
+			<div class="table-responsive">
+				<table class="table table-striped">
+					<thead>
+						<tr>
+							<th style="width: 8.609958506224066%;"
+								class="datatable-descending">INDEX</th>
+							<th style="width: 19.294605809128633%;"
+								class="datatable-descending">NAME</th>
+							<th style="width: 30.601659751037346%;"
+								class="datatable-descending">TITLE</th>
+							<th style="width: 8.609958506224066%;"
+								class="datatable-descending">별점</th>
+							<th style="width: 19.294605809128633%;"
+								class="datatable-descending">작성자</th>
+						</tr>
+					</thead>
 
-		<button type="button" class="btn btn-primary"
-			th:onclick="|location.href='@{/addReview(id=${param.id})}'|">
-			리뷰 작성</button>
-		<table class="table">
-			<thead>
-				<tr>
-					<th>#</th>
-					<th>이름</th>
-				</tr>
-			</thead>
+					<tbody>
 
-			<tbody>
-
-				<tr th:each="review : ${reviews}" 
-				th:onclick="'location.href=\''+ @{/{id}(id=${review.review_pk})} + '\''">
-					<td scope="row" width="10%"><div th:text="${review.review_pk}"></div></td>
-					<td scope="row" width="10%"><div th:text="${review.movie.movie_name}"></div></td>
-					<td scope="row" width="10%"><div th:text="${review.rv_title}"></div></td>
-					<td scope="row" width="10%"><div th:text="${review.rv_star}"></div></td>
-					<td scope="row" width="10%"><div th:text="${review.member.id}"></div></td>
-				</tr>
-			</tbody>
-		</table>
+						<tr th:each="review : ${reviews}"
+							th:onclick="'location.href=\''+ @{/{id}(id=${review.review_pk})} + '\''">
+							<td scope="row" width="10%"><div
+									th:text="${review.review_pk}"></div></td>
+							<td scope="row" width="10%"><div
+									th:text="${review.movie.movie_name}"></div></td>
+							<td scope="row" width="10%"><div
+									th:text="${review.rv_title}"></div></td>
+							<td scope="row" width="10%"><div th:text="${review.rv_star}"></div></td>
+							<td scope="row" width="10%"><div
+									th:text="${review.member.id}"></div></td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+		</div>
 	</div>
 </body>
 </html>

@@ -36,7 +36,6 @@ public class ReservServiceImpl implements ReservService{
 	private final MemberRepository memberRepository;
 	private final ScreenRepository screenRepository;
 	private final SeatRepository seatRepository;
-//	private final MovieRepository movieRepository;
 	
 	@Override
 	public ResponseEntity save(AddReserv formDto) {
@@ -45,13 +44,12 @@ public class ReservServiceImpl implements ReservService{
 		Optional<Screen> screen = screenRepository.findById(formDto.getScr_pk());
 		Optional<Seat> seat = seatRepository.findById(formDto.getSeat_pk());
 		
-		if(member.isPresent()) {
+		if(member.isPresent() && screen.isPresent() && seat.isPresent()) {
 			Member memberEntity = member.get();
 			Screen screenEntity = screen.get();
 			Seat seatEntity = seat.get();
 			
 			Reservation reserv = Reservation.builder()
-				.reservation_pk(formDto.getReservation_pk())
 				.reserv_date(LocalDateTime.now())
 				.seat(seatEntity)
 				.member(memberEntity)
@@ -59,7 +57,6 @@ public class ReservServiceImpl implements ReservService{
 				.build();
 			
 			reservRepository.save(reserv);
-			 
 			return new ResponseEntity("success", HttpStatus.OK);
 		}else {
 			return new ResponseEntity("fail", HttpStatus.BAD_REQUEST);
