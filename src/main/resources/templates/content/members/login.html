@@ -22,12 +22,7 @@
 			<div id="loginBoxTitle">Login</div>
 			<!-- 아이디, 비번, 버튼 박스 -->
 			<div id="inputBox">
-
-
-
-
 				<form>
-
 					<div class="input-form-box">
 						<span>아이디 </span><input id="id" name="id" type="text" data-sb-validations="required"
 							class="form-control">
@@ -36,7 +31,7 @@
 						<span>비밀번호 </span><input id="userpw" name="userpw" type="password" class="form-control">
 					</div>
 					<div class="button-login-box">
-						<button type="submit" class="btn-submit btn btn-primary btn-xs" style="width: 100%">로그인</button>
+						<button type="button" class="btn-submit btn btn-primary btn-xs" style="width: 100%">로그인</button>
 					</div>
 				</form>
 			</div>
@@ -59,27 +54,26 @@
                     e.preventDefault();
                 }
 
-                if (id != '' && userpw !='') {
-                    const path = 'http://localhost:8881/api/login';
-                    const json = JSON.stringify({
-                        'id': id,
-                        'userpw': userpw,
-                    });
-                    $.ajax({
-                        url: path,
-                        type: 'POST',
-                        contentType: 'application/json',
-                        data: json,
-                    }).done((response) => {
-                        if (response == 'success') {
-                            alert('로그인 성공')
-                            localStorage.setItem('id', id);
-                            location.href = "http://localhost:8881"
-                        } else {
-                            alert(response);
-                        }
-                    });
-                }
+                const path = 'http://localhost:8881/api/login';
+                const json = JSON.stringify({
+                    'id': id,
+                    'userpw': userpw
+                });
+                $.ajax({
+                    url: path,
+                    type: 'POST',
+                    contentType: 'application/json',
+                    data: json,
+                }).done((response) => {
+                    if (response == 'success') {
+                        alert('로그인 성공')
+                        localStorage.setItem('id', id);
+                        location.href = "http://localhost:8881"
+                    } else {
+                        alert(response);
+                    }
+                });
+                
             });
         });
     </script>

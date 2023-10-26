@@ -15,7 +15,7 @@
 			<div class="collapse navbar-collapse" id="navbarSupportedContent">
 				<ul class="navbar-nav ms-auto mb-2 mb-lg-0">
 					<li class="nav-item"><a class="nav-link" href="/movieList">영화</a></li>
-					<li class="nav-item"><a class="nav-link disabled" href="#">예매</a></li>
+					<li class="nav-item"><a class="nav-link disabled log" href="/selectScr">예매</a></li>
 					<li class="nav-item"><a class="nav-link" href="/signup">회원가입</a></li>
 					<li class="nav-item"><a class="nav-link" href="/login">로그인</a></li>
 					<li class="nav-item"><a class="nav-link" href="#"
@@ -27,7 +27,7 @@
 		</div>
 	</nav>
 </div>
-<script th:inline="javascript">
+<script>
 	function logout() {
 		if (localStorage.getItem('id') != null) {
 			localStorage.removeItem('id');
@@ -36,5 +36,7 @@
 			alert('로그인하세요!');
 		}
 	}
+$(document).ready(function() {
+});
 </script>
 </html>
