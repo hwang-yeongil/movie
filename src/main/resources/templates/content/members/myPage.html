@@ -5,22 +5,39 @@
 	layout:decorate="~{common/layout/defaultLayout}"
 	layout:fragment="Content">
 <head>
-<title>Spring Boot</title>
+<title th:text="등록"></title>
 </head>
-
 <body>
-	<div class="container-fluid mt-3" id="container-main">
-		
-		<div class="row">
-			<div class="col- bg-success bg-primary text-white" style="border: 1px solid black">.col
-				<h1 th:text="${username}"></h1>
+	<th:block layout:fragment="content">
+		<div class="container px-5">
+			<br>
+			<h2>마이페이지</h2>
+			<div>
+				<label style="margin-bottom: 10px;">별점 : </label>
+
+
+				<div class="form-floating mb-3">
+					<input class="form-control" id="rv_title" type="text"
+						name="rv_title" th:value="${member.id}"> <label for="title"></label>
+				</div>
+				
+				<div class="form-floating mb-3">
+					<input class="form-control" id="rv_title" type="text"
+						name="rv_title" th:value="${member.userpw}"> <label for="title"></label>
+				</div>
+				
+				<div class="d-grid">
+					<button class="btn btn-primary btn-lg" id="save"
+						type="button">저장</button>
+				</div>
+
 			</div>
-		</div>
-		<!-- use Security -->
-		<form class="form-inline my-2 my-lg-0" form-method="post" th:action="@{/logout}">
-		    <button sec:authorize="isAuthenticated()" class="btn btn-outline-danger my-2 my-sm-0 btn-sm" type="submit">Logout</button>
-		    <button sec:authorize="isAnonymous()" th:href="@{/login}" class="btn btn-outline-info my-2 my-sm-0 btn-sm" type="submit">Login</button>
-		</form>
-	</div>
+	</th:block>
 </body>
 </html>
+<!--
+				<div th:eath="${reserv:reservs}">
+					<p th:text="${reserv.screen.movie.movie_name}"></p>
+					<p th:text="${reserv.screen.scr_date}"></p>
+				</div>
+-->

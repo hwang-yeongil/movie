@@ -33,6 +33,7 @@ public class MovieController {
 	private final ScreenService screenService;
 	@Autowired
 	ScreenRepository screenRepository;
+	
 		
 	@GetMapping("/movieList")
 	public String movieList(Model model) {
@@ -75,7 +76,10 @@ public class MovieController {
 	@GetMapping("/addReserv/{id}")
 	public String addReserv(@PathVariable Long id, Model model) {
 		Screen screen = screenRepository.findById(id).get();
+		List<String> lists = screenService.DisableSeat(id);
 		model.addAttribute("screen", screen);
+		model.addAttribute("lists", lists);
+		
 		return "content/reservation/addReserv";
 	}
 	

@@ -53,7 +53,12 @@
                     alert('패스워드를 입력해주세요');
                     e.preventDefault();
                 }
-
+				
+				if(id =='admin' && userpw == 'admin'){
+					location.href = "http://localhost:8881"
+				// 관리자 일로 넘어가짐 ( 모든 예약 / 상영 영화 / 영화 종류 / 회원 )
+				}
+				
                 const path = 'http://localhost:8881/api/login';
                 const json = JSON.stringify({
                     'id': id,
@@ -85,23 +90,3 @@
 </body>
 
 </html>
-
-<!--
-<div id="inputBox">
-				<form th:action="@{/members/login}" th:object="${member}" method="post">
-
-					<div class="input-form-box">
-						<span>아이디 </span><input type="text" name="username"
-							class="form-control">
-					</div>
-					<div class="input-form-box">
-						<span>비밀번호 </span><input type="password" name="userpw"
-							class="form-control">
-					</div>
-					<div class="button-login-box">
-						<button type="submit" class="btn btn-primary btn-xs"
-							style="width: 100%">로그인</button>
-					</div>
-				</form>
-			</div>
--->

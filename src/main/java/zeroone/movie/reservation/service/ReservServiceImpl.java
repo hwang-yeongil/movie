@@ -36,7 +36,7 @@ public class ReservServiceImpl implements ReservService{
 	private final MemberRepository memberRepository;
 	private final ScreenRepository screenRepository;
 	private final SeatRepository seatRepository;
-	
+
 	@Override
 	public ResponseEntity save(AddReserv formDto) {
 		// TODO Auto-generated method stub
@@ -61,5 +61,19 @@ public class ReservServiceImpl implements ReservService{
 		}else {
 			return new ResponseEntity("fail", HttpStatus.BAD_REQUEST);
 		}
+	}
+	@Override
+	public List<Reservation> findMyReserv(String id) {
+		// TODO Auto-generated method stub
+		List<Reservation> reservs = reservRepository.findAll();
+		List<Reservation> res = new ArrayList<>();
+		 
+		for(Reservation rserv : reservs) {
+			if(rserv.getMember().getId().equals(id)) {
+				res.add(rserv);
+			}
+		}
+		
+		return res;
 	}
 }

@@ -1,42 +1,55 @@
 <html xmlns:th="http://www.thymeleaf.org" th:fragment="HeaderFragment">
 
 
-<div class="header"
-	style="top: 0; left: 0; border-bottom: solid 1px black; right: 0; height: 5%">
+<div class="header" style="top: 0; left: 0; border-bottom: solid 1px black; right: 0; height: 5%">
 	<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
 		<div class="container px-5">
 			<a class="navbar-brand" href="/">Main</a>
-			<button class="navbar-toggler" type="button"
-				data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
-				aria-controls="navbarSupportedContent" aria-expanded="false"
+			<button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+				data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
 				aria-label="Toggle navigation">
 				<span class="navbar-toggler-icon"></span>
 			</button>
 			<div class="collapse navbar-collapse" id="navbarSupportedContent">
 				<ul class="navbar-nav ms-auto mb-2 mb-lg-0">
 					<li class="nav-item"><a class="nav-link" href="/movieList">영화</a></li>
-					<li class="nav-item"><a class="nav-link disabled log" href="/selectScr">예매</a></li>
-					<li class="nav-item"><a class="nav-link" href="/signup">회원가입</a></li>
-					<li class="nav-item"><a class="nav-link" href="/login">로그인</a></li>
-					<li class="nav-item"><a class="nav-link" href="#"
-						onclick="logout()">로그아웃</a></li>
-					<li class="nav-item"><a class="nav-link" href="/list">회원목록</a></li>
-					<li class="nav-item"><a class="nav-link" href="/myPage">MyPage</a></li>
+					<li class="nav-item"><a class="nav-link" href="/selectScr">예매</a></li>
+					<li class="nav-item"><a class="nav-link unlog" href="/signup">회원가입</a></li>
+					<li class="nav-item"><a class="nav-link unlog" href="/login">로그인</a></li>
+					<li class="nav-item"><a class="nav-link log" onclick="logout()">로그아웃</a></li>
+					<li class="nav-item"><a class="nav-link log" href="/list">회원목록</a></li>
+					<li class="nav-item"><a class="nav-link log" onclick="myPage()">MyPage</a></li>
 				</ul>
 			</div>
 		</div>
 	</nav>
 </div>
 <script>
+	if (localStorage.getItem('id') != null) {
+		$(".log").show();
+		$(".unlog").hide();
+	} else {
+		$(".log").hide();
+		$(".unlog").show();
+	}
+
+
+
 	function logout() {
 		if (localStorage.getItem('id') != null) {
 			localStorage.removeItem('id');
 			alert('로그아웃 완료');
+			window.location.reload();
 		} else {
 			alert('로그인하세요!');
 		}
 	}
-$(document).ready(function() {
-});
+	function myPage() {
+		var MyID = localStorage.getItem('id');
+		location.href="http://localhost:8881/myPage/"+MyID;
+	}
+
+
 </script>
+
 </html>

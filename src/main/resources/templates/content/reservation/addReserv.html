@@ -1,40 +1,40 @@
 <!DOCTYPE html>
-<html lang="ko" xmlns:th="http://www.thymeleaf.org"
-	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-	layout:decorate="~{common/layout/defaultLayout}"
-	layout:fragment="Content">
+<html lang="ko" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="~{common/layout/defaultLayout}" layout:fragment="Content">
+
 <head>
-<title>회원관리</title>
-<style>
-.custom-label {
-	display: block;
-	padding: 20px 5px;
-	font-weight: bold;
-	color: #007BFF;
-	}
-.selected-cell {
-            background-color: #5bc0de; /* 원하는 배경색으로 변경하세요 */
-        }
-        
-</style>
+	<title>회원관리</title>
+	<style>
+		.custom-label {
+			display: block;
+			padding: 20px 5px;
+			font-weight: bold;
+			color: #007BFF;
+		}
+
+		.selected-cell {
+			background-color: #5bc0de;
+			/* 원하는 배경색으로 변경하세요 */
+		}
+	</style>
 </head>
+
 <body>
 	<div class="container">
 		<h2 class="text-center mb-4">좌석 선택</h2>
 		<p th:text="${screen.theater.theater_pk} + ' 상영관'"></p>
 		<div id="seatInfo" class="col-md-2 mt-3 p-3 border rounded">
-          <!-- 여기에 상영관 정보를 표시하는 내용을 추가할 수 있습니다. -->
-        </div>
+			<!-- 여기에 상영관 정보를 표시하는 내용을 추가할 수 있습니다. -->
+		</div>
 
 		<form method="post">
-        <div class="col-md-2">
-        <button class="btn btn-primary btn-lg" id="save"
-						type="button">저장</button>
-        </div>
+			<div class="col-md-2">
+				<button class="btn btn-primary btn-lg" id="save" type="button">저장</button>
+			</div>
 			<input type="hidden" id="theater_pk" th:value="${screen.theater.theater_pk}">
 			<input type="hidden" id="scr_pk" th:value="${screen.scr_pk}">
-			<input type="hidden" id="seat_pk" >
-			
+			<input type="hidden" id="seat_pk">
+
 			<div class="row">
 				<div class="col-md-12">
 					<div class="text-center">
@@ -47,48 +47,49 @@
 							<br>
 							<tbody>
 								<tr>
-									<td><label class="custom-label"><input
-											type="radio" name="seat" value="A1"> A1</label></td>
-									<td><label class="custom-label"><input
-											type="radio" name="seat" value="A2"> A2</label></td>
-									<td><label class="custom-label"><input
-											type="radio" name="seat" value="A3"> A3</label></td>
-									<td><label class="custom-label"><input
-											type="radio" name="seat" value="A4"> A4</label></td>
-									<td><label class="custom-label"><input
-											type="radio" name="seat" value="A5"> A5</label></td>
-									<td><label class="custom-label"><input
-											type="radio" name="seat" value="A6"> A6</label></td>
-									<td><label class="custom-label"><input
-											type="radio" name="seat" value="A7"> A7</label></td>
-									<td><label class="custom-label"><input
-											type="radio" name="seat" value="A8"> A8</label></td>
-									<td><label class="custom-label"><input
-											type="radio" name="seat" value="A9"> A9</label></td>
-									<td><label class="custom-label"><input
-											type="radio" name="seat" value="A10"> A10</label></td>
+									<td><label class="custom-label"><input type="radio" name="seat" id="A1" value="A1">
+											A1</label></td>
+									<td><label class="custom-label"><input type="radio" name="seat" id="A2" value="A2">
+											A2</label></td>
+									<td><label class="custom-label"><input type="radio" name="seat" id="A3" value="A3">
+											A3</label></td>
+									<td><label class="custom-label"><input type="radio" name="seat" id="A4" value="A4">
+											A4</label></td>
+									<td><label class="custom-label"><input type="radio" name="seat" id="A5" value="A5">
+											A5</label></td>
+									<td><label class="custom-label"><input type="radio" name="seat" id="A6" value="A6">
+											A6</label></td>
+									<td><label class="custom-label"><input type="radio" name="seat" id="A7" value="A7">
+											A7</label></td>
+									<td><label class="custom-label"><input type="radio" name="seat" id="A8" value="A8">
+											A8</label></td>
+									<td><label class="custom-label"><input type="radio" name="seat" id="A9" value="A9">
+											A9</label></td>
+									<td><label class="custom-label"><input type="radio" name="seat" id="A10"
+												value="A10"> A10</label></td>
+
 								</tr>
 								<tr>
-									<td><label class="custom-label"><input
-											type="radio" name="seat" value="B1"> B1</label></td>
-									<td><label class="custom-label"><input
-											type="radio" name="seat" value="B2"> B2</label></td>
-									<td><label class="custom-label"><input
-											type="radio" name="seat" value="B3"> B3</label></td>
-									<td><label class="custom-label"><input
-											type="radio" name="seat" value="B4"> B4</label></td>
-									<td><label class="custom-label"><input
-											type="radio" name="seat" value="B5"> B5</label></td>
-									<td><label class="custom-label"><input
-											type="radio" name="seat" value="B6"> B6</label></td>
-									<td><label class="custom-label"><input
-											type="radio" name="seat" value="B7"> B7</label></td>
-									<td><label class="custom-label"><input
-											type="radio" name="seat" value="B8"> B8</label></td>
-									<td><label class="custom-label"><input
-											type="radio" name="seat" value="B9"> B9</label></td>
-									<td><label class="custom-label"><input
-											type="radio" name="seat" value="B10"> B10</label></td>
+									<td><label class="custom-label"><input type="radio" name="seat" id="B1" value="B1">
+											B1</label></td>
+									<td><label class="custom-label"><input type="radio" name="seat" id="B2" value="B2">
+											B2</label></td>
+									<td><label class="custom-label"><input type="radio" name="seat" id="B3" value="B3">
+											B3</label></td>
+									<td><label class="custom-label"><input type="radio" name="seat" id="B4" value="B4">
+											B4</label></td>
+									<td><label class="custom-label"><input type="radio" name="seat" id="B5" value="B5">
+											B5</label></td>
+									<td><label class="custom-label"><input type="radio" name="seat" id="B6" value="B6">
+											B6</label></td>
+									<td><label class="custom-label"><input type="radio" name="seat" id="B7" value="B7">
+											B7</label></td>
+									<td><label class="custom-label"><input type="radio" name="seat" id="B8" value="B8">
+											B8</label></td>
+									<td><label class="custom-label"><input type="radio" name="seat" id="B9" value="B9">
+											B9</label></td>
+									<td><label class="custom-label"><input type="radio" name="seat" id="B10"
+												value="B10"> B10</label></td>
 
 								</tr>
 							</tbody>
@@ -100,66 +101,100 @@
 		</form>
 	</div>
 </body>
-<script type="text/javascript">
+<script th:inline="javascript">
+
+	const disableList = [];
+	/*[# th:each="n : ${lists}"]*/
+	disableList.push("[(${n})]");
+
+	/*[/]*/
+
+	console.log(disableList);
+	console.log("-----------------------------------");
+	for (let i = 0; i < disableList.length; i++) {
+
+		for (let a = 1; a <= 10; a++) {
+			let word1 = "A" + a;
+			if (disableList[i] === word1) {
+				document.getElementById(word1).disabled = true;
+				document.getElementById(word1).parentNode.style.backgroundColor = "red";
+			}
+		}
+		for (let b = 1; b <= 10; b++) {
+			let word2 = "B" + b;
+			if (disableList[i] === word2) {
+				document.getElementById(word2).disabled = true;
+				document.getElementById(word2).parentNode.style.backgroundColor = "red";
+			}
+		}
+
+	}
+
+
+
 	// 라디오 버튼이 선택될 때 호출되는 함수
-	$(document).ready(function() {
+
+
+	$(document).ready(function () {
+
+
+
+
 		var scr_pk = $('#scr_pk').val();
 		var theater_pk = $('#theater_pk').val();
 		$('input[name="seat"]').on('change', function () {
 			var seat_name = $('input[name="seat"]:checked').val();
-			if(seat_name){
-				$.post('/addReserv/'+ seat_name +'/' + theater_pk + '/' + scr_pk, function (data){
+			if (seat_name) {
+				$.post('/addReserv/' + seat_name + '/' + theater_pk + '/' + scr_pk, function (data) {
 					console.log(data);
 					document.getElementById('seat_pk').value = data;
 					$('#seatInfo').html('<p>' + seat_name + '<p>');
-					
 				})
-				
-				
-			}else{
+			} else {
+
 				$('#seatInfo').empty();
 			}
 		})
-		
 
-        $(function () {
-            $('#save').click((event) => {
-                var seat_pk = $('#seat_pk').val();
-                var member_id = localStorage.getItem("id");
-                var scr_pk = $('#scr_pk').val();
-        		var theater_pk = $('#theater_pk').val();
-        		console.log(seat_pk+' : '+ member_id +' : ' + scr_pk);
-                if (seat_pk == '') {
-                    alert('좌석을 선택해주세요');
-                    return;
-                }
-                if (member_id =='') {
-                    alert('로그인하고 다시 시도해주세요');
-                    return;
-                }
 
-                const path = 'http://localhost:8881/api/addReservation'; 
-                const json = JSON.stringify({
-                    'seat_pk': seat_pk,
-                    'scr_pk': scr_pk,
-                    'member_id': member_id
-                });
-                $.ajax({
-                    url: path,
-                    type: 'POST',
-                    contentType: 'application/json',
-                    data: json,
-                }).done((response) => {
-                    console.log(response);
-                    if (response == 'success') {
-                        alert('등록 성공')
-                        location.href = "http://localhost:8881"
-                    } else {
-                        alert(response);
-                    }
-                });
-            });
-        });
+		$(function () {
+			$('#save').click((event) => {
+				var seat_pk = $('#seat_pk').val();
+				var member_id = localStorage.getItem("id");
+				var scr_pk = $('#scr_pk').val();
+				var theater_pk = $('#theater_pk').val();
+				console.log(seat_pk + ' : ' + member_id + ' : ' + scr_pk);
+				if (seat_pk == '') {
+					alert('좌석을 선택해주세요');
+					return;
+				}
+				if (member_id == '') {
+					alert('로그인하고 다시 시도해주세요');
+					return;
+				}
+
+				const path = 'http://localhost:8881/api/addReservation';
+				const json = JSON.stringify({
+					'seat_pk': seat_pk,
+					'scr_pk': scr_pk,
+					'member_id': member_id
+				});
+				$.ajax({
+					url: path,
+					type: 'POST',
+					contentType: 'application/json',
+					data: json,
+				}).done((response) => {
+					console.log(response);
+					if (response == 'success') {
+						alert('등록 성공')
+						location.href = "http://localhost:8881"
+					} else {
+						alert(response);
+					}
+				});
+			});
+		});
 
 	});
 </script>

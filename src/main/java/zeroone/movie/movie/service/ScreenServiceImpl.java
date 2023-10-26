@@ -24,6 +24,8 @@ import zeroone.movie.movie.dto.SeatDto;
 import zeroone.movie.movie.dto.TheaterDto;
 import zeroone.movie.movie.repository.ScreenRepository;
 import zeroone.movie.movie.repository.SeatRepository;
+import zeroone.movie.reservation.domain.Reservation;
+import zeroone.movie.reservation.repository.ReservRepository;
 
 @Service
 @Transactional
@@ -35,6 +37,8 @@ public class ScreenServiceImpl implements ScreenService {
 	SeatRepository seatRepository;
 	@Autowired
 	ScreenRepository screenRepository;
+	@Autowired
+	ReservRepository reservRepository;
 
 	@Override
 	public List<MovieDto> movieList() {
@@ -141,5 +145,23 @@ public class ScreenServiceImpl implements ScreenService {
 			}
 		}
 		return seat_pk;
+	}
+	
+	@Override
+	public List<String> DisableSeat(Long scr_pk) {
+		// TODO Auto-generated method stub
+		Optional<Screen> screen = screenRepository.findById(scr_pk);
+		List<Reservation> reservations = reservRepository.findAll();
+		List<String> list = new ArrayList<>();
+		for(Reservation reserv : reservations) {
+			
+			if(screen.get().getScr_pk() == reserv.getScreen().getScr_pk() && 
+					screen.get().getTheater().getTheater_pk() == reserv.getSeat().getTheater().getTheater_pk()){
+				System.out.println(reserv.getSeat().getSeat_name());
+				list.add(reserv.getSeat().getSeat_name());
+			}
+		}
+		
+		return list;
 	}
 }

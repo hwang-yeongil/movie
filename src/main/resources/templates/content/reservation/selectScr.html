@@ -52,10 +52,18 @@
     $(document).ready(function () {
 		$(document).on('click', '#target', function() {
 		    // scr_pk 값을 가져옵니다.
-		    var scr_pk = $('#scr_pk').val();
+		    	function selectScr(){
+					if (localStorage.getItem('id') != null){
+						var scr_pk = $('#scr_pk').val();
 		    
-		    // 컨트롤러를 통해 이동
-		    window.location = '/addReserv/' + scr_pk;
+					    // 컨트롤러를 통해 이동
+					    window.location = '/addReserv/' + scr_pk;
+					}else{
+						alert('로그인 후 이용바랍니다');
+						location.href = "http://localhost:8881/login"
+					}
+				}
+		    
 		  });
 		
 		

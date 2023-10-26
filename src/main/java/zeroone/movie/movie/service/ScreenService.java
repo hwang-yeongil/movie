@@ -6,6 +6,7 @@ import java.util.List;
 import zeroone.movie.movie.domain.Screen;
 import zeroone.movie.movie.dto.DateDto;
 import zeroone.movie.movie.dto.MovieDto;
+import zeroone.movie.movie.dto.SeatDto;
 import zeroone.movie.movie.dto.TheaterDto;
 
 
@@ -20,4 +21,6 @@ public interface ScreenService {
 	Long findOneByAll(Long movie_pk, Long theater_pk, String scr_date);
 	
 	Long findSeat(String seat_name, Long theater_pk, Long scr_pk);
+	
+	List<String> DisableSeat(Long scr_pk);
 }

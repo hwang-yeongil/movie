@@ -1,35 +1,29 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org"
-	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-	xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
-	layout:decorate="~{common/layout/defaultLayout}"
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	xmlns:sec="http://www.thymeleaf.org/extras/spring-security" layout:decorate="~{common/layout/defaultLayout}"
 	layout:fragment="Content">
+
 <head>
-<title>Spring Boot</title>
+	<title>Spring Boot</title>
 </head>
 
 <body>
-	<div id="container-main" class="mt-5">
+	<div class="container px-4 px-lg-5">
 
-				<div class="container px-5 my-5">
-			<div class="table-responsive">
-				<table class="table table-striped">
-			<thead>
-				<tr>
-					<th>#</th>
-					<th>이름</th>
-				</tr>
-			</thead>
-			<tbody>
-				<tr th:each="movie : ${movies}">
-					<td th:text="${movie.movie_pk}"></td>
-					<td th:text="${movie.movie_name}"
-					th:onclick="|location.href='@{/reviewList/{link}(link=${movie.movie_pk})}'|"></td>
-				</tr>
-			</tbody>
-		</table>
+		<div class="row gx-4 gx-lg-5">
+			<div class="col-md-4 mb-5" th:each="movie : ${movies}">
+				<div class="card h-100">
+					<div class="card-body">
+						<h2 class="card-title" th:text="${movie.movie_name}">Card One</h2>
+						<p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Rem magni quas ex
+							numquam, maxime minus quam molestias corporis quod, ea minima accusamus.</p>
+					</div>
+					<div class="card-footer"><a class="btn btn-primary btn-sm"
+							th:onclick="|location.href='@{/selectScr}'|">예 매</a> <a class="btn btn-primary btn-sm"
+							th:onclick="|location.href='@{/reviewList/{link}(link=${movie.movie_pk})}'|">리 뷰</a></div>
+
+				</div>
+			</div>
+		</div>
 	</div>
-	</div>
-	</div>
-</body>
 </html>

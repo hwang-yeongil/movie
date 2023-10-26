@@ -30,7 +30,7 @@
 						<span>비밀번호 </span><input id="userpw" type="password" name="userpw" class="form-control">
 					</div>
 					<div class="button-login-box">
-						<button type="submit" class="btn-submit btn btn-primary btn-xs" style="width: 100%">등록</button>
+						<button type="button" class="btn-submit btn btn-primary btn-xs" style="width: 100%">등록</button>
 					</div>
 				</form>
 			</div>
@@ -68,7 +68,8 @@
 					}).done((response) => {
 						if (response == 'success') {
 							alert('회원가입 성공')
-							location.href = "http://localhost:8881"
+							alert('로그인 페이지로 이동 합니다')
+							location.href = "http://localhost:8881/login"
 						} else if (response == 'fail') {
 							alert('아이디를 변경하세요.');
 						} else {

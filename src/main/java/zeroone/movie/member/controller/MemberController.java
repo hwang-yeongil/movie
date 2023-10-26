@@ -11,6 +11,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -21,13 +22,17 @@ import lombok.RequiredArgsConstructor;
 import zeroone.movie.member.domain.Member;
 import zeroone.movie.member.repository.MemberRepository;
 import zeroone.movie.member.service.MemberService;
+import zeroone.movie.reservation.domain.Reservation;
+import zeroone.movie.reservation.service.ReservService;
 
 @Controller
 @RequiredArgsConstructor
 public class MemberController {
 
 	private final MemberService memberService;
-	private final MemberRepository memberRepository;
+	private final ReservService reservService;
+	@Autowired
+	MemberRepository memberRepository;
 	
 	@GetMapping(value = "/signup")
 	public String createForm() {
@@ -41,16 +46,15 @@ public class MemberController {
 
 //	마이페이지
 	
-//	@GetMapping("/myPage")
-//	public String myPage(@SessionAttribute(name = "member", required = false) Member member, Model model) {
-//		if (member == null) {
-//			return "/members/login";
-//		}
-//		model.addAttribute("member", member);
-//
-//		return "content/members/myPage";
-//
-//	}
+	@GetMapping("/myPage/{id}")
+	public String myPage(@PathVariable String id, Model model) {
+		Optional<Member> member = memberRepository.findById(id);
+//		List<Reservation> res = reservService.findMyReserv(id);
+		model.addAttribute("member", member);
+//		model.addAttribute("reservs", res);
+		return "content/members/myPage";
+
+	}
 
 	// 관리자 조회
 	@GetMapping(value = "/list")

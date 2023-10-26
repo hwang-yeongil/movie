@@ -10,8 +10,10 @@
 <body>
 	<th:block layout:fragment="content">
 		<div class="container px-5">
-			<h2>새 글 작성</h2>
+			<br>
+			<h2>리뷰 작성</h2>
 			<div>
+				<label style="margin-bottom: 10px;">별점 : </label>
 				<input type="hidden" name="movie_pk" id="movie_pk"
 					th:value=${param.id}> <select name="rv_star" id="rv_star">
 					<option value="1">1</option>
@@ -78,7 +80,7 @@
                     console.log(response);
                     if (response == 'success') {
                         alert('등록 성공')
-                        location.href = "http://localhost:8881"
+                        location.href = "http://localhost:8881/reviewList/"+movie_pk
                     } else {
                         alert(response);
                     }
