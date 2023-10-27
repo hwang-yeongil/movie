@@ -109,7 +109,12 @@
 			
 			$('#remove').click((event) => {
 				var member_id = $('#m_id').val();
-				location.href="http://localhost:8881/delet2"+member_id;
+				if(!confirm("탈퇴 하시겠습니까?")){
+					
+					location.href="http://localhost:8881/delet2" +member_id;
+				}else{
+					
+				}
 			})
 	</script>
 </body>
