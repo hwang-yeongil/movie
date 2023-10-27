@@ -18,29 +18,25 @@
 						class="datatable-descending">영화</th>
 					<th style="width: 30.601659751037346%;"
 						class="datatable-descending">날짜</th>
-					<th style="width: 8.609958506224066%;" class="datatable-descending">좌석</th>
-					<th style="width: 19.294605809128633%;"
-						class="datatable-descending">이름</th>
+					<th style="width: 8.609958506224066%;" class="datatable-descending">상영관</th>
+
 				</tr>
 			</thead>
 
 			<tbody>
 
-				<tr th:each="reserv : ${reservs}">
+				<tr th:each="scr : ${scrList}">
 					<td scope="row" width="10%">
-						<div th:text="${reserv.reservation_pk}"></div>
+						<div th:text="${scr.scr_pk}"></div>
 					</td>
 					<td scope="row" width="10%">
-						<div th:text="${reserv.screen.movie.movie_name}"></div>
+						<div th:text="${scr.movie.movie_name}"></div>
 					</td>
 					<td scope="row" width="10%">
-						<div th:text="${reserv.reserv_date}"></div>
+						<div th:text="${scr.scr_date}"></div>
 					</td>
 					<td scope="row" width="10%">
-						<div th:text="${reserv.screen.theater.theater_pk}+ '관/ ' + ${reserv.seat.seat_name}"></div>
-					</td>
-					<td scope="row" width="10%">
-						<div th:text="${reserv.member.id}"></div>
+						<div th:text="${scr.theater.theater_pk} + '관'"></div>
 					</td>
 				</tr>
 			</tbody>

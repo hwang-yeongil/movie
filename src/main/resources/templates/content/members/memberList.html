@@ -9,7 +9,7 @@
 <body>
 	<div id="container-main" class="mt-5">
 
-		<table class="table">
+		<table class="table table-striped">
 			<thead>
 				<tr>
 					<th>#</th>
@@ -23,7 +23,6 @@
 					<td th:text="${member.secession}"></td>
 					<td><a th:href="@{/members/delete(id=${member.id})}">삭제1</a></td>
 					<td><a th:href="@{/delete2(id=${member.id})}">삭제2</a></td>
-					<div th:if="${member.secession == 0}"></div>
 				</tr>
 			</tbody>
 		</table>

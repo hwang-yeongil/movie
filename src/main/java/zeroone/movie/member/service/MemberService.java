@@ -7,6 +7,7 @@ import org.springframework.http.ResponseEntity;
 import zeroone.movie.member.domain.Member;
 import zeroone.movie.member.dto.LoginDto;
 import zeroone.movie.member.dto.MemberFormDto;
+import zeroone.movie.member.dto.MyPageDto;
 
 public interface MemberService {
 	ResponseEntity signup(MemberFormDto formDto);
@@ -15,5 +16,9 @@ public interface MemberService {
 	
 	List<Member> findAll();
 	
-	void deleteById(String id); 
+	void deleteById(String id);
+	
+	MyPageDto findId(String id);
+	
+	ResponseEntity update(String id, LoginDto loginDto);
 }

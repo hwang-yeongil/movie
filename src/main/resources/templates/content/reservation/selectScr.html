@@ -52,7 +52,7 @@
     $(document).ready(function () {
 		$(document).on('click', '#target', function() {
 		    // scr_pk 값을 가져옵니다.
-		    	function selectScr(){
+		    	
 					if (localStorage.getItem('id') != null){
 						var scr_pk = $('#scr_pk').val();
 		    
@@ -62,7 +62,7 @@
 						alert('로그인 후 이용바랍니다');
 						location.href = "http://localhost:8881/login"
 					}
-				}
+				
 		    
 		  });
 		

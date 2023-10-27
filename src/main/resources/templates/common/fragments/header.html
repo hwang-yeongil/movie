@@ -17,23 +17,34 @@
 					<li class="nav-item"><a class="nav-link unlog" href="/signup">회원가입</a></li>
 					<li class="nav-item"><a class="nav-link unlog" href="/login">로그인</a></li>
 					<li class="nav-item"><a class="nav-link log" onclick="logout()">로그아웃</a></li>
-					<li class="nav-item"><a class="nav-link log" href="/list">회원목록</a></li>
 					<li class="nav-item"><a class="nav-link log" onclick="myPage()">MyPage</a></li>
+					<li class="nav-item"><a class="nav-link admin" href="/list">회원목록</a></li>
+					<li class="nav-item"><a class="nav-link admin" href="/reservList">예매목록</a></li>
+					<li class="nav-item"><a class="nav-link admin" href="/scrList">상영목록</a></li>
+					<li class="nav-item"><a class="nav-link admin" onclick="logout()">로그아웃</a></li>
+					
 				</ul>
 			</div>
 		</div>
 	</nav>
 </div>
 <script>
-	if (localStorage.getItem('id') != null) {
+	console.log(localStorage.getItem('id'));
+
+	if (localStorage.getItem('id') == 'admin') {
+		$(".log").hide();
+		$(".unlog").hide();
+		$(".admin").show();
+	}else if(localStorage.getItem('id') != null){
 		$(".log").show();
 		$(".unlog").hide();
-	} else {
+		$(".admin").hide()
+	}else{
 		$(".log").hide();
 		$(".unlog").show();
+		$(".admin").hide()
 	}
-
-
+	
 
 	function logout() {
 		if (localStorage.getItem('id') != null) {

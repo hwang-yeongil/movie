@@ -8,34 +8,114 @@
 <title th:text="등록"></title>
 </head>
 <body>
-	<th:block layout:fragment="content">
-		<div class="container px-5">
+	<div class="container px-5">
+		<div class="col-md-6">
 			<br>
 			<h2>마이페이지</h2>
 			<div>
-				<label style="margin-bottom: 10px;">별점 : </label>
-
+			<input type="hidden" id="m_id" th:value="${member.id}">
+				<div class="form-floating mb-3">
+					<input class="form-control" id="member_id" type="text"
+						th:placeholder="${member.id}"> <label for="title"></label>
+				</div>
 
 				<div class="form-floating mb-3">
-					<input class="form-control" id="rv_title" type="text"
-						name="rv_title" th:value="${member.id}"> <label for="title"></label>
+					<input class="form-control" id="member_pw" type="text"
+						th:placeholder="${member.userpw}"> <label for="title"></label>
 				</div>
-				
-				<div class="form-floating mb-3">
-					<input class="form-control" id="rv_title" type="text"
-						name="rv_title" th:value="${member.userpw}"> <label for="title"></label>
-				</div>
-				
+
 				<div class="d-grid">
-					<button class="btn btn-primary btn-lg" id="save"
-						type="button">저장</button>
+					<button class="btn btn-primary btn-lg" id="update" type="button">수정</button>
+					<button class="btn btn-primary btn-lg" id="remove" type="button">회원탈퇴</button>
 				</div>
+				<table class="table table-striped">
+					<thead>
+						<tr>
+							<th style="width: 8.609958506224066%;"
+								class="datatable-descending">INDEX</th>
+							<th style="width: 19.294605809128633%;"
+								class="datatable-descending">영화</th>
+							<th style="width: 30.601659751037346%;"
+								class="datatable-descending">날짜</th>
+							<th style="width: 8.609958506224066%;"
+								class="datatable-descending">좌석</th>
+							<th style="width: 19.294605809128633%;"
+								class="datatable-descending">이름</th>
+						</tr>
+					</thead>
 
+					<tbody>
+
+						<tr th:each="reserv : ${reservs}">
+							<td scope="row" width="10%">
+								<div th:text="${reserv.reservation_pk}"></div>
+							</td>
+							<td scope="row" width="10%">
+								<div th:text="${reserv.screen.movie.movie_name}"></div>
+							</td>
+							<td scope="row" width="10%">
+								<div th:text="${reserv.reserv_date}"></div>
+							</td>
+							<td scope="row" width="10%">
+								<div
+									th:text="${reserv.screen.theater.theater_pk}+ '관/ ' + ${reserv.seat.seat_name}"></div>
+							</td>
+							<td scope="row" width="10%">
+								<div th:text="${reserv.member.id}"></div>
+							</td>
+						</tr>
+					</tbody>
+				</table>
 			</div>
-	</th:block>
+
+
+		</div>
+	</div>
+	<script th:inline="javascript">
+		const reservList = [];
+		/*[# th:each="n : ${reservs}"]*/
+		reservList.push("[(${n})]");
+
+		/*[/]*/
+			$('#update').click((event) => {
+			var member_id = $('#member_id').val();
+			var member_pw = $('#member_pw').val();
+			
+			console.log(member_id);
+			console.log(localStorage.getItem('id'));
+
+                const path = 'http://localhost:8881/api/update/' +member_id ;
+				const json = JSON.stringify({
+					'id' : member_id,
+					'userpw' : member_pw
+				})
+                   
+                   $.ajax({
+                       url: path,
+                       type: 'PATCH',
+                       contentType: 'application/json',
+                       data: json,
+                   }).done((result) => {
+                       console.log(result);
+                       if (result == 'success') {
+                           alert('수정 성공');
+                        window.location.reload();
+                       } else {
+                           alert(result);
+                       }
+                   });
+                
+			})
+			
+			$('#remove').click((event) => {
+				var member_id = $('#m_id').val();
+				location.href="http://localhost:8881/delet2"+member_id;
+			})
+	</script>
 </body>
 </html>
 <!--
+				
 				<div th:eath="${reserv:reservs}">
 					<p th:text="${reserv.screen.movie.movie_name}"></p>
 					<p th:text="${reserv.screen.scr_date}"></p>

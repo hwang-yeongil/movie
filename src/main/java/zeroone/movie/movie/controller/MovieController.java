@@ -89,4 +89,9 @@ public class MovieController {
 		return screenService.findSeat(seat_name, theater_pk, scr_pk);
 	}
 	
+	@GetMapping("/scrList")
+	public String scrList(Model model) {
+		model.addAttribute("scrList", screenRepository.findAll());
+		return "content/reservation/scrList";
+	}
 }

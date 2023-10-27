@@ -54,11 +54,6 @@
                     e.preventDefault();
                 }
 				
-				if(id =='admin' && userpw == 'admin'){
-					location.href = "http://localhost:8881"
-				// 관리자 일로 넘어가짐 ( 모든 예약 / 상영 영화 / 영화 종류 / 회원 )
-				}
-				
                 const path = 'http://localhost:8881/api/login';
                 const json = JSON.stringify({
                     'id': id,

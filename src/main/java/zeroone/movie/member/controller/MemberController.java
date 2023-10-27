@@ -7,12 +7,15 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.SessionAttribute;
@@ -20,9 +23,13 @@ import org.springframework.web.servlet.ModelAndView;
 
 import lombok.RequiredArgsConstructor;
 import zeroone.movie.member.domain.Member;
+import zeroone.movie.member.dto.LoginDto;
+import zeroone.movie.member.dto.MemberFormDto;
+import zeroone.movie.member.dto.MyPageDto;
 import zeroone.movie.member.repository.MemberRepository;
 import zeroone.movie.member.service.MemberService;
 import zeroone.movie.reservation.domain.Reservation;
+import zeroone.movie.reservation.repository.ReservRepository;
 import zeroone.movie.reservation.service.ReservService;
 
 @Controller
@@ -33,25 +40,31 @@ public class MemberController {
 	private final ReservService reservService;
 	@Autowired
 	MemberRepository memberRepository;
+	@Autowired
+	ReservRepository reservRepository;
 	
 	@GetMapping(value = "/signup")
 	public String createForm() {
-		return "/content/members/createMemberForm";
+		return "content/members/createMemberForm";
 	}
 	
 	@GetMapping(value = "/login")
 	public String login() {
-		return "/content/members/login";
+		return "content/members/login";
 	}
 
 //	마이페이지
 	
 	@GetMapping("/myPage/{id}")
 	public String myPage(@PathVariable String id, Model model) {
-		Optional<Member> member = memberRepository.findById(id);
-//		List<Reservation> res = reservService.findMyReserv(id);
+	
+		MyPageDto member = memberService.findId(id);
+
 		model.addAttribute("member", member);
-//		model.addAttribute("reservs", res);
+//		List<Reservation> list = reservRepository.findAll();
+//		model.addAttribute("reservs", list);
+		List<Reservation> reservs = reservService.findMyReserv(id);
+		model.addAttribute("reservs", reservs);
 		return "content/members/myPage";
 
 	}
@@ -61,7 +74,7 @@ public class MemberController {
 	public String list(Model model) {
 		List<Member> members = memberService.findAll();
 		model.addAttribute("members", members);
-		return "/content/members/memberList";
+		return "content/members/memberList";
 	}
 
 //	// 특정 유저 삭제
@@ -76,6 +89,6 @@ public class MemberController {
 		memberService.deleteById(id);
 		return "redirect:/list";
 	}
-
+	
 
 }
