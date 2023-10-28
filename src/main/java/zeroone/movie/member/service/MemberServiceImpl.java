@@ -71,9 +71,11 @@ public class MemberServiceImpl implements MemberService {
 	@Override
 	public void deleteById(String id) {
 		// TODO Auto-generated method stub
-		em.createQuery("update Member m set m.secession=1 where m.id = :id").setParameter("id", id).executeUpdate();
-		em.clear();
-
+//		em.createQuery("update Member m set m.secession=1 where m.id = :id").setParameter("id", id).executeUpdate();
+//		em.clear();
+//		Member member = memberRepository.findById(id).orElseThrow(RuntimeException::new);
+		memberRepository.deleteById(id);
+//		return new ResponseEntity("success", HttpStatus.OK);
 	}
 
 	@Override

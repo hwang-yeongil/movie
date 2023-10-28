@@ -21,16 +21,20 @@
 
 <body>
 	<div class="container">
-		<h2 class="text-center mb-4">좌석 선택</h2>
+		
+		<h2 class="text-center mb-4 mt-3">좌석 선택</h2>
 		<p th:text="${screen.theater.theater_pk} + ' 상영관'"></p>
-		<div id="seatInfo" class="col-md-2 mt-3 p-3 border rounded">
-			<!-- 여기에 상영관 정보를 표시하는 내용을 추가할 수 있습니다. -->
-		</div>
-
-		<form method="post">
-			<div class="col-md-2">
-				<button class="btn btn-primary btn-lg" id="save" type="button">저장</button>
+		<div class="row">
+			
+			<div id="seatInfo" class="col-md-2 mt-1 border rounded">
+				<!-- 여기에 상영관 정보를 표시하는 내용을 추가할 수 있습니다. -->
 			</div>
+
+			<div class="col-md-10">
+				<button class="btn btn-primary btn-lg" style="float: right;" id="save" type="button">저장</button>
+			</div>
+		</div>
+		<form method="post">
 			<input type="hidden" id="theater_pk" th:value="${screen.theater.theater_pk}">
 			<input type="hidden" id="scr_pk" th:value="${screen.scr_pk}">
 			<input type="hidden" id="seat_pk">
@@ -148,7 +152,7 @@
 				$.post('/addReserv/' + seat_name + '/' + theater_pk + '/' + scr_pk, function (data) {
 					console.log(data);
 					document.getElementById('seat_pk').value = data;
-					$('#seatInfo').html('<p>' + seat_name + '<p>');
+					$('#seatInfo').html('<h3>' + seat_name + '<h3>');
 				})
 			} else {
 

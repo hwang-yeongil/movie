@@ -73,4 +73,16 @@ public class ReservServiceImpl implements ReservService {
 
 		return res;
 	}
+	
+	@Override
+	public void deleteAll(String id) {
+		// TODO Auto-generated method stub
+		List<Reservation> reservs = reservRepository.findAll();
+
+		for (Reservation reserv : reservs) {
+			if (reserv.getMember().getId().equals(id)) {
+				reservRepository.deleteById(reserv.getReservation_pk());
+			}
+		}
+	}
 }

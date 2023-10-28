@@ -2,6 +2,7 @@ package zeroone.movie;
 
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -17,6 +18,7 @@ import org.springframework.web.bind.annotation.RestController;
 import lombok.RequiredArgsConstructor;
 import zeroone.movie.member.dto.LoginDto;
 import zeroone.movie.member.dto.MemberFormDto;
+import zeroone.movie.member.repository.MemberRepository;
 import zeroone.movie.member.service.MemberService;
 import zeroone.movie.movie.domain.Movie;
 import zeroone.movie.movie.repository.MovieRepository;
@@ -35,7 +37,8 @@ public class ApiController {
 	private final ReviewService reviewService;
 	private final MovieRepository movieRepository;
 	private final ReservService reservService;
-	
+	@Autowired
+	MemberRepository memberRepository;
 
 	
 //	회원가입
@@ -54,7 +57,11 @@ public class ApiController {
 		ResponseEntity responseEntity = memberService.update(id, loginDto);
 		return responseEntity;
 	}
-	
+//	@DeleteMapping("/delete2/{id}")
+//	public void memberDelete2(@PathVariable String id) {
+//		System.out.println(id);
+//		memberRepository.deleteById(id);
+//	}
 	
 	
 //	리뷰 작성

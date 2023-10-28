@@ -1,156 +1,170 @@
 <!DOCTYPE html>
 <html lang="ko" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-  layout:decorate="~{common/layout/defaultLayout}" layout:fragment="Content">
+	layout:decorate="~{common/layout/defaultLayout}" layout:fragment="Content">
 
 <head>
-  <title>회원관리</title>
+	<title>회원관리</title>
 </head>
 
 <body>
-  <div id="container-main" class="mt-5 container">
-    <div class="row">
-      <div class="col-md-6" id="movieTable">
-        <form method="post">
-          <th:block th:each="movie : ${movies}">
-            <div class="form-check mb-3">
-              <input type="radio" class="form-check-input" name="movie" th:value="${movie.movie_pk}" th:id="'movie_' + ${movie.movie_pk}">
-              <label class="form-check-label" th:for="'movie_' + ${movie.movie_pk}" th:text="${movie.movie_name}">Movie Title</label>
-            </div>
-          </th:block>
-        </form>
-      </div>
-      <div class="col-md-6" id="theaterTable">
-        <form method="post" id="theaterSelect">
-        </form>
-      </div>
-    </div>
-    <div class="row">
-      <div class="col-md-6" id="dateTable">
-        <form method="post" id="dateSelect">
-        </form>
-      </div>
-      <div class="col-md-6">
-        <div id="movieInfo" class="mt-3 p-3 border rounded">
-          <!-- 여기에 영화 정보를 표시하는 내용을 추가할 수 있습니다. -->
-        </div>
-        <div id="theaterInfo" class="mt-3 p-3 border rounded">
-          <!-- 여기에 상영관 정보를 표시하는 내용을 추가할 수 있습니다. -->
-        </div>
-        <div id="dateInfo" class="mt-3 p-3 border rounded">
-          <!-- 여기에 상영관 정보를 표시하는 내용을 추가할 수 있습니다. -->
-        </div>
-        <form method="post">
-          <input type="hidden" id="scr_pk" name="scr_pk" value="0">
-          <button id="target" type="button" class="btn-submit btn btn-primary" disabled>좌석 선택</button>
-        </form>
-      </div>
-    </div>
-  </div>
+	<div id="container-main" class="mt-5 container">
+		<div class="row">
 
-  <script type="text/javascript">
-    // 영화 선택 후 기능
-    $(document).ready(function () {
-		$(document).on('click', '#target', function() {
-		    // scr_pk 값을 가져옵니다.
-		    	
-					if (localStorage.getItem('id') != null){
-						var scr_pk = $('#scr_pk').val();
-		    
-					    // 컨트롤러를 통해 이동
-					    window.location = '/addReserv/' + scr_pk;
-					}else{
-						alert('로그인 후 이용바랍니다');
-						location.href = "http://localhost:8881/login"
-					}
+			<div id="movieInfo" class="mt-3 p-2 border rounded col-md-4" >
+				<!-- 여기에 영화 정보를 표시하는 내용을 추가할 수 있습니다. -->
 				
-		    
-		  });
-		
-		
-   	 const target = $('#target');
-   	 // 왜 저거 타켓팅이 안되는거지
+			</div><br>
+			<div id="theaterInfo" class="mt-3 p-2 border rounded col-md-4">
+				<!-- 여기에 상영관 정보를 표시하는 내용을 추가할 수 있습니다. -->
+			</div>
+			<div id="dateInfo" class="mt-3 p-2 border rounded col-md-4">
+				<!-- 여기에 상영관 정보를 표시하는 내용을 추가할 수 있습니다. -->
+			</div>
 
-      $('input[name="movie"]').on('change', function () {
-        var movieId = $('input[name="movie"]:checked').val();
-        if (movieId) {
-          $.post('/selectScr/' + movieId, function (data) {
-            $('#movieInfo').html('<h2>' + movieId + '</h2>');
+		</div>
+		<div class="row">
 
-            console.log(data);
-            var theaterSelect = $('#theaterSelect');
-            theaterSelect.empty();
+			<div class="col-md-4 card h-100" id="movieTable">
+				<div class="card-header">영화</div>
+				<div style="height: 500px;">
+				<form method="post">
+					<th:block th:each="movie : ${movies}">
+						<div class="form-check card-body ps-5">
+							<input type="radio" class="form-check-input" name="movie" th:value="${movie.movie_pk}"
+								th:id="'movie_' + ${movie.movie_pk}">
+							<label class="form-check-label" th:for="'movie_' + ${movie.movie_pk}"
+								th:text="${movie.movie_name}">Movie Title</label>
+						</div>
+					</th:block>
+				</form>
+				</div>
+			</div>
 
-            $.each(data, function (index, item) {
-              var theaterRadio = '<div class="form-check">';
-              theaterRadio += '<input type="radio" class="form-check-input" name="theater" value="' + item.theater_pk + '" id="theater_' + item.theater_pk + '">';
-              theaterRadio += '<label class="form-check-label" for="theater_' + item.theater_pk + '">' + item.theater_pk + '관</label>';
-              theaterRadio += '</div>';
-              theaterSelect.append(theaterRadio);
+			<div class="col-md-4 card h-100" id="theaterTable">
+				<div class="card-header">상영관</div>
+				<form method="post" id="theaterSelect">
+				</form>
+			</div>
 
-              if (data.length === 0) {
-                theaterSelect.html("이 영화는 상영 가능한 영화관이 없습니다.");
-              }
-            });
-          })
-        } else {
-          $('#movieInfo').empty();
-          var theaterTable = $('#theaterTable');
-          theaterTable.empty();
-        }
-      });
+			<div class="col-md-4 card h-100" id="dateTable">
+				<div class="card-header">날짜</div>
+				<form method="post" id="dateSelect">
+				</form>
+			</div>
+			<form method="post">
+				<hr>
+				<div class="card-footer" style="float: right;">
+					<input type="hidden" id="scr_pk" name="scr_pk" value="0">
+					<button id="target" type="button" class="btn-submit btn btn-primary" disabled>좌석 선택</button>
+				</div>
+			</form>
+		</div>
+	</div>
 
-      // 상영관 선택 후 기능
-      $(document).on('change', 'input[name="theater"]', function () {
-        var theater_pk = $('input[name="theater"]:checked').val();
-        var movieId = $('input[name="movie"]:checked').val();
-        console.log(theater_pk);
-        console.log(movieId);
-        if (theater_pk) {
-          $.post('/selectScr/' + movieId + '/' + theater_pk, function (data) {
-            $('#theaterInfo').html('<h2>' + theater_pk + '</h2>');
-            console.log(data);
-            var dateSelect = $('#dateSelect');
-            dateSelect.empty();
+	<script type="text/javascript">
+		// 영화 선택 후 기능
+		$(document).ready(function () {
+			$(document).on('click', '#target', function () {
+				// scr_pk 값을 가져옵니다.
 
-            $.each(data, function (index, item) {
-              var dateRadio = '<div class="form-check">';
-              dateRadio += '<input type="radio" class="form-check-input" name="date" value="' + item.scr_date + '" id="date_' + index + '">';
-              dateRadio += '<label class="form-check-label" for="date_' + index + '">' + item.scr_l_time + '</label>';
-              dateRadio += '</div>';
-              dateSelect.append(dateRadio);
-              // 추가적인 작업 수행
-            });
-          });
-        } else {
-          $('#theaterInfo').empty();
-          var dateTable = $('#dateTable');
-          dateTable.empty();
-        }
-      });
+				if (localStorage.getItem('id') != null) {
+					var scr_pk = $('#scr_pk').val();
 
-      $(document).on('change', 'input[name="date"]', function () {
-    	 var theater_pk = $('input[name="theater"]:checked').val();
-         var movieId = $('input[name="movie"]:checked').val();
-    	 var scr_date = $('input[name="date"]:checked').val();
-    	 if(scr_date){
-			 target.prop('disabled', false);
-   			
-    		 $.post('/selectScr/' + movieId + '/' + theater_pk + '/' + scr_date, function (data) {
-    			 $('#dateInfo').html('<h2>' + scr_date + '</h2>');
-    			 console.log(data);
-    			 // 동작
-    			 document.getElementById('scr_pk').value = data;
-    		 })	 
-    		 
-    	 }else {
-             $('#dateInfo').empty();
-             target.prop('disabled', true);
-           }
-    	 
-      });
-      
-    });
-  </script>
+					// 컨트롤러를 통해 이동
+					window.location = '/addReserv/' + scr_pk;
+				} else {
+					alert('로그인 후 이용바랍니다');
+					location.href = "http://localhost:8881/login"
+				}
+
+
+			});
+
+
+			const target = $('#target');
+			// 왜 저거 타켓팅이 안되는거지
+
+			$('input[name="movie"]').on('change', function () {
+				var movieId = $('input[name="movie"]:checked').val();
+				if (movieId) {
+					$.post('/selectScr/' + movieId, function (data) {
+						$('#movieInfo').html('<h3>'+movieId+'</h3>');
+
+						console.log(data);
+						var theaterSelect = $('#theaterSelect');
+						theaterSelect.empty();
+
+						$.each(data, function (index, item) {
+							var theaterRadio = '<div class="form-check card-body ps-5">';
+							theaterRadio += '<input type="radio" class="form-check-input" name="theater" value="' + item.theater_pk + '" id="theater_' + item.theater_pk + '">';
+							theaterRadio += '<label class="form-check-label" for="theater_' + item.theater_pk + '">' + item.theater_pk + '관</label>';
+							theaterRadio += '</div>';
+							theaterSelect.append(theaterRadio);
+
+							if (data.length === 0) {
+								theaterSelect.html("이 영화는 상영 가능한 영화관이 없습니다.");
+							}
+						});
+					})
+				} else {
+					$('#movieInfo').empty();
+					var theaterTable = $('#theaterTable');
+					theaterTable.empty();
+				}
+			});
+
+			// 상영관 선택 후 기능
+			$(document).on('change', 'input[name="theater"]', function () {
+				var theater_pk = $('input[name="theater"]:checked').val();
+				var movieId = $('input[name="movie"]:checked').val();
+				console.log(theater_pk);
+				console.log(movieId);
+				if (theater_pk) {
+					$.post('/selectScr/' + movieId + '/' + theater_pk, function (data) {
+						$('#theaterInfo').html('<h3>' + theater_pk + '</h3>');
+						console.log(data);
+						var dateSelect = $('#dateSelect');
+						dateSelect.empty();
+
+						$.each(data, function (index, item) {
+							var dateRadio = '<div class="form-check card-body ps-5">';
+							dateRadio += '<input type="radio" class="form-check-input" name="date" value="' + item.scr_date + '" id="date_' + index + '">';
+							dateRadio += '<label class="form-check-label" for="date_' + index + '">' + item.scr_l_time + '</label>';
+							dateRadio += '</div>';
+							dateSelect.append(dateRadio);
+							// 추가적인 작업 수행
+						});
+					});
+				} else {
+					$('#theaterInfo').empty();
+					var dateTable = $('#dateTable');
+					dateTable.empty();
+				}
+			});
+
+			$(document).on('change', 'input[name="date"]', function () {
+				var theater_pk = $('input[name="theater"]:checked').val();
+				var movieId = $('input[name="movie"]:checked').val();
+				var scr_date = $('input[name="date"]:checked').val();
+				if (scr_date) {
+					target.prop('disabled', false);
+
+					$.post('/selectScr/' + movieId + '/' + theater_pk + '/' + scr_date, function (data) {
+						$('#dateInfo').html('<h3>' + scr_date + '</h3>');
+						console.log(data);
+						// 동작
+						document.getElementById('scr_pk').value = data;
+					})
+
+				} else {
+					$('#dateInfo').empty();
+					target.prop('disabled', true);
+				}
+
+			});
+
+		});
+	</script>
 </body>
 
 </html>

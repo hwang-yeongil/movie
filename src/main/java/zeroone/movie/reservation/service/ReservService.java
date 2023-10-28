@@ -11,4 +11,6 @@ public interface ReservService {
 	ResponseEntity save(AddReserv addReserv);
 	
 	List<Reservation> findMyReserv(String id);
+	
+	void deleteAll(String id);
 }

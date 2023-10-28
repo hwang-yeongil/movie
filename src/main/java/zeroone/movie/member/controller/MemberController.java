@@ -83,12 +83,19 @@ public class MemberController {
 //		memberService.delete(id);
 //		return "content/members";
 //	}
-//	// 특정 유저 삭제( db 상엔 그대로 유지 )
-	@GetMapping("/delete2")
-	public String memberDelete2(String id) {
+//	@GetMapping("/delete2")
+//	public String memberDelete2(String id) {
+//		memberService.deleteById(id);
+//		return "redirect:/list";
+//	}
+	@GetMapping("/delete")
+	public String deleteMember(String id) {
 		memberService.deleteById(id);
 		return "redirect:/list";
 	}
-	
-
+	@GetMapping("/delete1")
+	public String deleteMember1(String id) {
+		memberService.deleteById(id);
+		return "redirect:/";
+	}
 }

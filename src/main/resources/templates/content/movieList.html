@@ -9,7 +9,7 @@
 
 <body>
 	<div class="container px-4 px-lg-5">
-
+		<br>
 		<div class="row gx-4 gx-lg-5">
 			<div class="col-md-4 mb-5" th:each="movie : ${movies}">
 				<div class="card h-100">
@@ -18,12 +18,15 @@
 						<p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Rem magni quas ex
 							numquam, maxime minus quam molestias corporis quod, ea minima accusamus.</p>
 					</div>
-					<div class="card-footer"><a class="btn btn-primary btn-sm"
-							th:onclick="|location.href='@{/selectScr}'|">예 매</a> <a class="btn btn-primary btn-sm"
-							th:onclick="|location.href='@{/reviewList/{link}(link=${movie.movie_pk})}'|">리 뷰</a></div>
+					<div class="card-footer">
+						<a class="btn btn-primary btn-sm" th:onclick="|location.href='@{/selectScr}'|">예 매</a>
+						<a class="btn btn-primary btn-sm"
+							th:onclick="|location.href='@{/reviewList/{link}(link=${movie.movie_pk})}'|">리 뷰</a>
+					</div>
 
 				</div>
 			</div>
 		</div>
 	</div>
+
 </html>

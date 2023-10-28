@@ -25,8 +25,8 @@ public class MemberServiceIntegrationTest {
 	MemberRepository memberRepository;
 
 	@Test
-	public void 회원가입() throws Exception {
-		memberRepository.findAll();
+	public void 삭제() throws Exception {
+		memberService.deleteById("1234");
 	}
 
 }
