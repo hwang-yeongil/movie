@@ -5,16 +5,15 @@
 	layout:fragment="Content">
 
 <head>
-<title>회원관리</title>
+<title>상세보기(수정)</title>
 </head>
 
 <body>
-	<div id="container-main" class="mt-5">
-		<h1 th:text="${review.rv_title}"></h1>
+	<div id="container-main" class="container px-5">
+		<br>
 		<h2 th:text="${review.movie.movie_name}"></h2>
-		<h2 th:text="${review.member_id}"></h2>
+		<h2 style="float: right;" th:text="${review.member_id}"></h2>
 		<div id="content-box">
-			<input type="text" id="rv_title" th:value="${review.rv_title}">
 			<div>
 				글번호 : <span th:text="${review.review_pk}"></span>
 			</div>
@@ -32,10 +31,14 @@
 					<option value="5">5</option>
 				</select>
 			</div>
-			<div>글 내용</div>
-			<div id="line">
-				<textarea class="rv_content" name="rv_content"
-					th:text="${review.rv_content}" rows="10" cols="50"></textarea>
+			<div class="form-floating mb-3">
+				<h3>글 제목</h3>
+				<input class="form-control" id="rv_title" type="text" name="rv_title"
+					th:value="${review.rv_title}">
+			</div>
+			<div class="form-floating mb-3">
+				<textarea class="form-control rv_content" id="rv_content" type="text" style="height: 10rem"
+					th:text="${review.rv_content}"></textarea>
 			</div>
 		</div>
 		<div>
@@ -98,3 +101,7 @@
 </body>
 
 </html>
+<!-- 
+	
+	
+-->

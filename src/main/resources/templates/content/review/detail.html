@@ -1,84 +1,90 @@
 <!DOCTYPE html>
-<html lang="ko" xmlns:th="http://www.thymeleaf.org" 
-	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-	layout:decorate="~{common/layout/defaultLayout}" 
-	layout:fragment="Content">
+<html lang="ko" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="~{common/layout/defaultLayout}" layout:fragment="Content">
 
 <head>
-	<title>회원관리</title>
+	<title>상세보기</title>
 </head>
 
 <body>
-	<div id="container-main" class="mt-5">
-		<h1 th:text="${review.rv_title}"></h1>
+	<div id="container-main" class="container px-5">
+		<br>
 		<h2 th:text="${review.movie.movie_name}"></h2>
-		<h2 th:text="${review.member_id}"></h2>
+		<h2 style="float: right;" th:text="${review.member_id}"></h2>
 		<div id="content-box">
-			<div>글번호 : <span th:text="${review.review_pk}"></span></div>
 			<div>등록 일시 : <span th:text="${review.rv_date}"></span></div>
 
 			<div>별점 : <span th:text="${review.rv_star}"></span></div>
-			<div>글 내용</div>
-			<div id="line" th:text="${review.rv_content}"></div>
+
+			<div class="form-floating mb-3">
+				<h3>글 제목</h3>
+				<input class="form-control" id="rv_title" type="text" name="rv_title" disabled
+					th:value="${review.rv_title}">
+			</div>
+			<div class="form-floating mb-3">
+				<textarea class="form-control rv_content" id="rv_content" type="text" style="height: 10rem" disabled
+					th:text="${review.rv_content}"></textarea>
+			</div>
+
 		</div>
 		<div>
-			<button id="update" type="button">수정</button>
-			<button id="remove" type="button">삭제</button>
+			<button id="update" class="btn btn-primary btn-lg" type="button">수정</button>
+			<button id="remove" class="btn btn-primary btn-lg" type="button">삭제</button>
 		</div>
 
 	</div>
-    <script th:inline="javascript">
-		
-		
-        $(document).ready(function () {
-            /*<![CDATA[*/
+	<script th:inline="javascript">
 
-            var review_pk = /*[[${review.review_pk}]]*/'';
-            var member_id = /*[[${review.member_id}]]*/'';
-			
-            $('#update').click((event) => {
-                if (localStorage.getItem('id') != member_id) {
-                    alert('권한이 없습니다');
-                } else {
-                    location.href = "http://localhost:8881/update/" + review_pk;
-                }
-            })
 
-            $('#remove').click((event) => {
-                if (localStorage.getItem('id') != member_id) {
-                    alert('권한이 없습니다');
-                } else {
-                    const path = 'http://localhost:8881/api/reviewList/' + review_pk;
+		$(document).ready(function () {
+			/*<![CDATA[*/
 
-                    $.ajax({
-                        url: path,
-                        type: 'DELETE',
-                        contentType: 'application/json',
-                    }).done((result) => {
-                        console.log(result);
-                        location.href = "http://localhost:8881"
-                        if (result == 'success') {
-                            alert('삭제 성공');
-                        } else {
-                            alert(result);
-                        }
-                    });
-                }
-            })
-            
-            $('#update').click((event) => {
-            	if(localStorage.getItem('id') != member_id) {
-            		alert('권한이 없습니다');
-            	} else{
-            		location.href = "http://localhost:8881/update/" + review_pk;
-            	}
-            	
-            })
-            
-        /*]]*/
-        });
+			var review_pk = /*[[${review.review_pk}]]*/'';
+			var member_id = /*[[${review.member_id}]]*/'';
 
-    </script>
+			$('#update').click((event) => {
+				if (localStorage.getItem('id') != member_id) {
+					alert('권한이 없습니다');
+				} else {
+					location.href = "http://localhost:8881/update/" + review_pk;
+				}
+			})
+
+			$('#remove').click((event) => {
+				if (localStorage.getItem('id') != member_id) {
+					alert('권한이 없습니다');
+				} else {
+					const path = 'http://localhost:8881/api/reviewList/' + review_pk;
+
+					$.ajax({
+						url: path,
+						type: 'DELETE',
+						contentType: 'application/json',
+					}).done((result) => {
+						console.log(result);
+						location.href = "http://localhost:8881"
+						if (result == 'success') {
+							alert('삭제 성공');
+						} else {
+							alert(result);
+						}
+					});
+				}
+			})
+
+			$('#update').click((event) => {
+				if (localStorage.getItem('id') != member_id) {
+					alert('권한이 없습니다');
+				} else {
+					location.href = "http://localhost:8881/update/" + review_pk;
+				}
+
+			})
+
+			/*]]*/
+		});
+
+	</script>
 </body>
 
 </html>

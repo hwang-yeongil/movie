@@ -25,10 +25,10 @@
 
 					<tbody>
 
-						<tr th:each="review : ${reviews}"
+						<tr th:each="review, stat : ${reviews}"
 							th:onclick="'location.href=\''+ @{/{id}(id=${review.review_pk})} + '\''">
 							<td scope="row" width="10%">
-								<div th:text="${review.review_pk}"></div>
+								<div th:text="|${stat.count}|"></div>
 							</td>
 							<td scope="row" width="10%">
 								<div th:text="${review.movie.movie_name}"></div>
